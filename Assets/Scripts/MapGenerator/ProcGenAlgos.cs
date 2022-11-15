@@ -17,7 +17,6 @@ public static class ProcGenAlgos
             path.Add(newPosition);
             previousPosition = newPosition;
         }
-
         return path;
     }
 }
