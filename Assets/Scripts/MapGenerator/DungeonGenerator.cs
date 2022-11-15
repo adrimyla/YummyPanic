@@ -5,22 +5,18 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class DungeonGenerator : MonoBehaviour
+public class DungeonGenerator : AbstractDungeonGenerator
 {
     [SerializeField]
     protected Vector2Int startPosition = Vector2Int.zero;
 
     [SerializeField]
-    private int iterations = 10;
-    [SerializeField]
-    public int walkLength = 10;
-    [SerializeField]
-    public bool startRandomly = true; //Start randomly each iterations
+    private GeneratorData randomWalkParameters;
     
     [SerializeField]
     private TilemapVisualizer tilemapVisualizer;
 
-    public void RunProceduralGeneration()
+    protected override void RunProceduralGeneration()
     {
         HashSet<Vector2Int> floorPositions = RunRandomWalk();
         tilemapVisualizer.Clear();
