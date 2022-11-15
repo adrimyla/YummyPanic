@@ -24,7 +24,7 @@ public static class ProcGenAlgos
 public static class Direction2D
 {
     //Contains different direction on a 2D map
-    public static List<Vector2Int> cardinalDirectiobnList = new List<Vector2Int>
+    public static List<Vector2Int> cardinalDirectionList = new List<Vector2Int>
     {
         new Vector2Int(0,1), //UP
         new Vector2Int(1,0), //RIGHT
@@ -35,6 +35,6 @@ public static class Direction2D
     //Return a random direction
     public static Vector2Int GetRandomCardinalDirection()
     {
-        return cardinalDirectiobnList[Random.Range(0, cardinalDirectiobnList.Count)];
+        return cardinalDirectionList[Random.Range(0, cardinalDirectionList.Count)];
     }
 }
