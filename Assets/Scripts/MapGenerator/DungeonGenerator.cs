@@ -16,14 +16,15 @@ public class DungeonGenerator : MonoBehaviour
     public int walkLength = 10;
     [SerializeField]
     public bool startRandomly = true; //Start randomly each iterations
+    
+    [SerializeField]
+    private TilemapVisualizer tilemapVisualizer;
 
     public void RunProceduralGeneration()
     {
         HashSet<Vector2Int> floorPositions = RunRandomWalk();
-        foreach(var pos in floorPositions)
-        {
-            Debug.Log(pos);
-        }
+        tilemapVisualizer.Clear();
+        tilemapVisualizer.PaintFloorTiles(floorPositions);
     }
 
     protected HashSet<Vector2Int> RunRandomWalk()
