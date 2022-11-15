@@ -8,13 +8,7 @@ using Random = UnityEngine.Random;
 public class DungeonGenerator : AbstractDungeonGenerator
 {
     [SerializeField]
-    protected Vector2Int startPosition = Vector2Int.zero;
-
-    [SerializeField]
-    private GeneratorData randomWalkParameters;
-    
-    [SerializeField]
-    private TilemapVisualizer tilemapVisualizer;
+    private DungeonData data;
 
     protected override void RunProceduralGeneration()
     {
@@ -27,11 +21,11 @@ public class DungeonGenerator : AbstractDungeonGenerator
     {
         var currentPosition = startPosition;
         HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
-        for(int i = 0; i < iterations; i++)
+        for(int i = 0; i < data.iterations; i++)
         {
-            var path = ProcGenAlgos.SimpleRandomWalk(currentPosition, walkLength);
+            var path = ProcGenAlgos.SimpleRandomWalk(currentPosition, data.walkLength);
             floorPositions.UnionWith(path); //Adding path to floorPositions and ignoring duplicates (Union)
-            if (startRandomly)
+            if (data.startRandomly)
                 currentPosition = floorPositions.ElementAt(Random.Range(0, floorPositions.Count));
         }
         return floorPositions;
