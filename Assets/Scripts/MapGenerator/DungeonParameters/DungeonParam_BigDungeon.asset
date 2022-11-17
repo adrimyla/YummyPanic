@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ce90a93156eb9140877271416d52499, type: 3}
-  m_Name: DungeonData_BigDungeon
+  m_Script: {fileID: 11500000, guid: cc3998209a3c41347936f607f0a3600b, type: 3}
+  m_Name: DungeonParam_BigDungeon
   m_EditorClassIdentifier: 
-  iterations: 100
-  walkLength: 100
-  startRandomly: 1
+  roomParam: {fileID: 11400000, guid: cca04351e56dc4d438e74f3766ab552e, type: 2}
+  corridorLength: 25
+  corridorCount: 15
+  roomPercent: 0.5
