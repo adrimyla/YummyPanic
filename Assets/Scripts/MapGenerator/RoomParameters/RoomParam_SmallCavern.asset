@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ce90a93156eb9140877271416d52499, type: 3}
-  m_Name: DungeonData_Island
+  m_Name: RoomParam_SmallCavern
   m_EditorClassIdentifier: 
-  iterations: 100
+  iterations: 30
   walkLength: 20
-  startRandomly: 0
+  startRandomly: 1
