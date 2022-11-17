@@ -8,7 +8,7 @@ public class GluttonHealth : MonoBehaviour
      * Attributs
      */
     [SerializeField] private int _maxHP; // points de vie maximum
-    private int _currentHP; // points de vie actuels
+    [SerializeField] private int _currentHP; // points de vie actuels
     private bool _isAlive = true; // statut du Glouton
 
     /*

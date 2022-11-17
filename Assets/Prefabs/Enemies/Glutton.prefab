@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4472515664807730588}
   - component: {fileID: 4298923929814279641}
   - component: {fileID: 2157236413348925379}
+  - component: {fileID: 5715309433528707171}
   m_Layer: 0
   m_Name: Glutton
   m_TagString: Enemy
@@ -100,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHP: 10
+  _currentHP: 0
 --- !u!58 &4298923929814279641
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -137,3 +139,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &5715309433528707171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5598762888315798581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b124313c7ee2164ca86c9aae952d6f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -11,11 +11,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _walkingSpeed; // vitesse de marche
     [SerializeField] private float _runningSpeed; // vitesse de course
     [SerializeField] private float slowingCoefficient = 0.7f; // Coefficient de ralentissement des mouvements diagonaux
+    // Directions
+    [HideInInspector] public float verticalDistance;
+    [HideInInspector] public float horizontalDistance;
+
     /*
-     * Méthode
+     * Méthodes
      */
 
-    void Update()
+    void FixedUpdate()
     {
         Move();
     }
@@ -26,8 +30,8 @@ public class PlayerMovement : MonoBehaviour
     void Move()
     {
         // Calcul de la distance à parcourir
-        float verticalDistance = Input.GetAxis("Vertical") * _walkingSpeed * Time.deltaTime;
-        float horizontalDistance = Input.GetAxis("Horizontal") * _walkingSpeed * Time.deltaTime;
+        verticalDistance = Input.GetAxis("Vertical") * _walkingSpeed * Time.deltaTime;
+        horizontalDistance = Input.GetAxis("Horizontal") * _walkingSpeed * Time.deltaTime;
         /* On "ralentit" légèrement les mouvements en diagonale
         *  Sans cela, le joueur bouge beaucoup plus rapidement que lors de mouvements purement horizontaux ou verticaux.
         */
