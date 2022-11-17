@@ -4,20 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class CorridorFirstDungeonGen : RandomWalkGen
+public class DungeonGenerator : RoomGenerator
 {
     [SerializeField]
-    private int corridorLength = 14, corridorCount = 5;
-    [SerializeField]
-    [Range(0.1f, 1)]
-    public float roomPercent = 0.8f;
+    protected DungeonParameter dungeonParameter;
 
     protected override void RunProceduralGeneration()
     {
-        CorridorFirstGeneration();
+        GenerateCorridors();
     }
 
-    private void CorridorFirstGeneration()
+    private void GenerateCorridors()
     {
         HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
         HashSet<Vector2Int> potentialRoomPositions = new HashSet<Vector2Int>();
@@ -43,7 +40,7 @@ public class CorridorFirstDungeonGen : RandomWalkGen
         {
             if (!roomFloors.Contains(pos)) //If this dead end is not in a room
             {
-                var room = RunRandomWalk(randomWalkParam, pos); //Create a new room at this position
+                var room = RunRandomWalk(dungeonParameter.roomParam, pos); //Create a new room at this position
                 roomFloors.UnionWith(room); //Add the room to roomFloors list
             }
         }
@@ -71,14 +68,14 @@ public class CorridorFirstDungeonGen : RandomWalkGen
     private HashSet<Vector2Int> CreateRooms(HashSet<Vector2Int> potentialRoomPositions)
     {
         HashSet<Vector2Int> roomPositions = new HashSet<Vector2Int>();
-        int roomToCreateCount = Mathf.RoundToInt(potentialRoomPositions.Count * roomPercent); //Getting room count from percent parameter
+        int roomToCreateCount = Mathf.RoundToInt(potentialRoomPositions.Count * dungeonParameter.roomPercent); //Getting room count from percent parameter
 
         //Convert a HashSet to a Sorted List
         List<Vector2Int> roomsToCreate = potentialRoomPositions.OrderBy(x => Guid.NewGuid()).Take(roomToCreateCount).ToList(); //Create a new Global Unique Identifier (used to sort using this value)
    
         foreach(var roomPosition in roomsToCreate)
         {
-            var roomFloor = RunRandomWalk(randomWalkParam, roomPosition);
+            var roomFloor = RunRandomWalk(dungeonParameter.roomParam, roomPosition);
             roomPositions.UnionWith(roomFloor); //Avoid room floor doublons
         }
         return roomPositions;
@@ -90,9 +87,9 @@ public class CorridorFirstDungeonGen : RandomWalkGen
         var currentPos = startPosition;
         potentialRoomPositions.Add(currentPos); //Adding actual position to potential room position
 
-        for(int i = 0; i < corridorCount; i++)
+        for(int i = 0; i < dungeonParameter.corridorCount; i++)
         {
-            var corridor = ProcGenAlgos.RandomWalkCorridor(currentPos, corridorLength);
+            var corridor = RandomWalkAlgos.RandomWalkCorridor(currentPos, dungeonParameter.corridorLength);
             currentPos = corridor[corridor.Count - 1]; //Saving last position (at the end of the path)
             potentialRoomPositions.Add(currentPos); //The end of the corridor is a potential room
             floorPositions.UnionWith(corridor);
