@@ -5,20 +5,20 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class DungeonGenerator : AbstractDungeonGenerator
+public class RandomWalkGen : AbstractDungeonGenerator
 {
     [SerializeField]
     private DungeonData data;
 
     protected override void RunProceduralGeneration()
     {
-        HashSet<Vector2Int> floorPositions = RunRandomWalk();
+        HashSet<Vector2Int> floorPositions = RunRandomWalk(data);
         tilemapVisualizer.Clear(); //Clear display
         tilemapVisualizer.PaintFloorTiles(floorPositions); //Display floor
         WallGenerator.CreateWalls(floorPositions,tilemapVisualizer); //Display walls
     }
 
-    protected HashSet<Vector2Int> RunRandomWalk()
+    protected HashSet<Vector2Int> RunRandomWalk(DungeonData parameters)
     {
         var currentPosition = startPosition;
         HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
