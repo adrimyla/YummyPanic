@@ -16,21 +16,50 @@ public class DungeonGenerator : RoomGenerator
 
     private void GenerateCorridors()
     {
+        //Contains every kitchen tiles positions
+        HashSet<Vector2Int> kitchenPositions = new HashSet<Vector2Int>();
+
+        //Contains every floor tiles positions
         HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
+
+        //Contains every potentatial position for a room to be created
         HashSet<Vector2Int> potentialRoomPositions = new HashSet<Vector2Int>();
 
-        CreateCorridors(floorPositions, potentialRoomPositions);
+        //Create the kitchen where the player will spawn
+        CreateKitchen(kitchenPositions);
 
+        //Create corridors from the kitchen
+        CreateCorridors(floorPositions, potentialRoomPositions, kitchenPositions);
+
+        //Create rooms from corridors extremities 
         HashSet<Vector2Int> roomPositions = CreateRooms(potentialRoomPositions);
 
+        //Find where corridors lead nowhere
         List<Vector2Int> deadEnds = FindAllDeadEnds(floorPositions);
 
+        //Create rooms where corridors end
         CreateRoomsAtDeadEnds(deadEnds, roomPositions);
 
-        floorPositions.UnionWith(roomPositions); //Avoid room doublons
+        //Update floor positions with room positions (and avoid doublons)
+        floorPositions.UnionWith(roomPositions); 
 
+        //Display dungeon floor
         tilemapVisualizer.PaintFloorTiles(floorPositions);
+
+        //Display kitchen floor
+        tilemapVisualizer.PaintKitchenFloorTiles(kitchenPositions);
+
+        //Create walls
         WallGenerator.CreateWalls(floorPositions, tilemapVisualizer);
+
+    }
+
+    private void CreateKitchen(HashSet<Vector2Int> kitchenPositions)
+    {
+        Debug.Log("Creating kitchen at " + startPosition.ToString());
+
+        var currentPos = startPosition;
+        kitchenPositions.Add(currentPos);
 
     }
 
@@ -82,11 +111,15 @@ public class DungeonGenerator : RoomGenerator
     
     }
 
-    private void CreateCorridors(HashSet<Vector2Int> floorPositions, HashSet<Vector2Int> potentialRoomPositions)
+    private void CreateCorridors(HashSet<Vector2Int> floorPositions, HashSet<Vector2Int> potentialRoomPositions, HashSet<Vector2Int> kitchenPositions)
     {
         var currentPos = startPosition;
-        potentialRoomPositions.Add(currentPos); //Adding actual position to potential room position
 
+        if (kitchenPositions.Contains(currentPos))
+        {
+            potentialRoomPositions.Add(currentPos); //Adding actual position to potential room position
+        }
+        
         for(int i = 0; i < dungeonParameter.corridorCount; i++)
         {
             var corridor = RandomWalkAlgos.RandomWalkCorridor(currentPos, dungeonParameter.corridorLength);

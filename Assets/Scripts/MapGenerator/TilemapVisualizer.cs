@@ -7,13 +7,18 @@ using UnityEngine.Tilemaps;
 public class TilemapVisualizer : MonoBehaviour
 {
     [SerializeField]
-    private Tilemap floorTilemap, wallTilemap;
+    private Tilemap floorTilemap, wallTilemap, kitchenTileMap;
     [SerializeField]
-    private TileBase floorTile, wallTop;
+    private TileBase floorTile, wallTop, kitchenTile;
 
     public void PaintFloorTiles(IEnumerable<Vector2Int> floorPositions)
     {
         PaintTiles(floorPositions, floorTilemap, floorTile);
+    }
+
+    public void PaintKitchenFloorTiles(IEnumerable<Vector2Int> kitchenPositions)
+    {
+        PaintTiles(kitchenPositions, kitchenTileMap, kitchenTile);
     }
 
     private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tileMap, TileBase tile)
