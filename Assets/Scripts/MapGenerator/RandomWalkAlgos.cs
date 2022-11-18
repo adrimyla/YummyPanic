@@ -39,7 +39,7 @@ public static class RandomWalkAlgos
 public static class Direction2D
 {
     //Contains different direction on a 2D map
-    public static List<Vector2Int> cardinalDirectionList = new List<Vector2Int>
+    public static List<Vector2Int> fourDirections = new List<Vector2Int>
     {
         new Vector2Int(0,1), //UP
         new Vector2Int(1,0), //RIGHT
@@ -47,9 +47,23 @@ public static class Direction2D
         new Vector2Int(-1,0), //LEFT
     };
 
+    //Contains different direction on a 2D map
+    public static List<Vector2Int> eightDirections = new List<Vector2Int>
+    {
+        new Vector2Int(0,1), //UP
+        new Vector2Int(1,1), //UP RIGHT
+        new Vector2Int(1,0), //RIGHT
+        new Vector2Int(1,-1), //DOWN RIGHT
+        new Vector2Int(0,-1), //DOWN
+        new Vector2Int(-1,-1), //DOWN LEFT
+        new Vector2Int(-1,0), //LEFT
+        new Vector2Int(-1,1), //UP LEFT
+
+    };
+
     //Return a random direction
     public static Vector2Int GetRandomCardinalDirection()
     {
-        return cardinalDirectionList[Random.Range(0, cardinalDirectionList.Count)];
+        return fourDirections[Random.Range(0, fourDirections.Count)];
     }
 }

@@ -61,6 +61,19 @@ public class DungeonGenerator : RoomGenerator
         var currentPos = startPosition;
         kitchenPositions.Add(currentPos);
 
+        int radius = dungeonParameter.kitchenSize / 2;
+
+        for(int i = 0; i < radius; i++)
+        {
+            foreach (Vector2Int dir in Direction2D.eightDirections)
+            {
+                Vector2Int target = new Vector2Int(dir.x + (i * dir.x), dir.y + (i * dir.y));
+                Debug.Log("Placing kitchen floor at " + (currentPos + target));
+                kitchenPositions.Add(currentPos + target);
+            }
+        }
+        
+
     }
 
     private void CreateRoomsAtDeadEnds(List<Vector2Int> deadEnds, HashSet<Vector2Int> roomFloors)
@@ -81,7 +94,7 @@ public class DungeonGenerator : RoomGenerator
         foreach(var pos in floorPositions)
         {
             int neighboursCount = 0;
-            foreach(var direction in Direction2D.cardinalDirectionList)
+            foreach(var direction in Direction2D.fourDirections)
             {
                 if (floorPositions.Contains(pos + direction)) //If there is floor next to this floor
                     neighboursCount++;                

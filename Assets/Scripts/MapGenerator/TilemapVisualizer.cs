@@ -39,6 +39,7 @@ public class TilemapVisualizer : MonoBehaviour
     {
         floorTilemap.ClearAllTiles();
         wallTilemap.ClearAllTiles();
+        kitchenTileMap.ClearAllTiles();
     }
 
     internal void PaintSingleBasicWall(Vector2Int position)
