@@ -12,13 +12,24 @@ public class DungeonGenerator : RoomGenerator
 
     protected override void RunProceduralGeneration()
     {
-        GenerateCorridors();
+        Kitchen kitchen = GenerateKitchen();
+        GenerateRoomsAndCorridors(kitchen);
     }
 
-    private void GenerateCorridors()
+    private Kitchen GenerateKitchen()
     {
-        //Contains every kitchen tiles positions
-        HashSet<Vector2Int> kitchenPositions = new HashSet<Vector2Int>();
+        //Create the kitchen where the player will spawn
+        Kitchen kitchen = new Kitchen(dungeonParameter.kitchenHeight, dungeonParameter.kitchenWidth, startPosition);
+        
+        tilemapVisualizer.PaintKitchenFloorTiles(kitchen.floorPos); //Display kitchen floor
+        
+        WallGenerator.CreateWalls(kitchen.floorPos, tilemapVisualizer); //Display kitchen walls   
+
+        return kitchen;
+    }
+
+    private void GenerateRoomsAndCorridors(Kitchen kitchen)
+    {
 
         //Contains every floor tiles positions
         HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
@@ -26,11 +37,11 @@ public class DungeonGenerator : RoomGenerator
         //Contains every potentatial position for a room to be created
         HashSet<Vector2Int> potentialRoomPositions = new HashSet<Vector2Int>();
 
-        //Create the kitchen where the player will spawn
-        Kitchen kitchen = new Kitchen(dungeonParameter.kitchenHeight, dungeonParameter.kitchenWidth, startPosition);
-
         //Create corridors from the kitchen
         CreateCorridors(floorPositions, potentialRoomPositions);
+
+        //Removing kitchen position from potentialRoomPositions
+        potentialRoomPositions.Except(kitchen.floorPos);
 
         //Create rooms from corridors extremities 
         HashSet<Vector2Int> roomPositions = CreateRooms(potentialRoomPositions);
@@ -42,16 +53,13 @@ public class DungeonGenerator : RoomGenerator
         CreateRoomsAtDeadEnds(deadEnds, roomPositions);
 
         //Update floor positions with room positions (and avoid doublons)
-        floorPositions.UnionWith(roomPositions); 
+        floorPositions.UnionWith(roomPositions);
 
         //Display dungeon floor
         tilemapVisualizer.PaintFloorTiles(floorPositions);
 
-        //Display kitchen floor
-        tilemapVisualizer.PaintKitchenFloorTiles(kitchen.floorPos);
-
         //Create walls
-        WallGenerator.CreateWalls(floorPositions, tilemapVisualizer);
+        //WallGenerator.CreateWalls(floorPositions, tilemapVisualizer);
 
     }
 
@@ -106,8 +114,6 @@ public class DungeonGenerator : RoomGenerator
     private void CreateCorridors(HashSet<Vector2Int> floorPositions, HashSet<Vector2Int> potentialRoomPositions)
     {
         var currentPos = startPosition;
-
-        potentialRoomPositions.Add(currentPos); //Adding actual position to potential room position
 
         for(int i = 0; i < dungeonParameter.corridorCount; i++)
         {

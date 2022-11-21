@@ -13,7 +13,6 @@ public class RoomGenerator : AbstractDungeonGenerator
     protected override void RunProceduralGeneration()
     {
         HashSet<Vector2Int> floorPositions = RunRandomWalk(roomParam, startPosition);
-        tilemapVisualizer.Clear(); //Clear display
         tilemapVisualizer.PaintFloorTiles(floorPositions); //Display floor
         WallGenerator.CreateWalls(floorPositions,tilemapVisualizer); //Display walls
     }
