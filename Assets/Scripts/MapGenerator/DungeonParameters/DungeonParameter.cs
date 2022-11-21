@@ -6,7 +6,8 @@ using UnityEngine;
 public class DungeonParameter : ScriptableObject
 {
     [Header("Kitchen")]
-    public int kitchenSize = 5;
+    public int kitchenHeight = 5;
+    public int kitchenWidth = 5;
 
     [Header("Corridors")]
     public int corridorLength = 14;

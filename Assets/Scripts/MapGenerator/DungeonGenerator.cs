@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class DungeonGenerator : RoomGenerator
 {
@@ -59,20 +60,18 @@ public class DungeonGenerator : RoomGenerator
         Debug.Log("Creating kitchen at " + startPosition.ToString());
 
         var currentPos = startPosition;
+        Vector2Int offset = new Vector2Int(dungeonParameter.kitchenWidth /2, dungeonParameter.kitchenHeight /2);
+
         kitchenPositions.Add(currentPos);
 
-        int radius = dungeonParameter.kitchenSize / 2;
-
-        for(int i = 0; i < radius; i++)
+        for(int i =0; i < dungeonParameter.kitchenWidth; i++) //Height
         {
-            foreach (Vector2Int dir in Direction2D.eightDirections)
+            for(int j =0; j < dungeonParameter.kitchenHeight; j++) //Width
             {
-                Vector2Int target = new Vector2Int(dir.x + (i * dir.x), dir.y + (i * dir.y));
-                Debug.Log("Placing kitchen floor at " + (currentPos + target));
-                kitchenPositions.Add(currentPos + target);
+                currentPos = startPosition + new Vector2Int(i, j);              
+                kitchenPositions.Add(currentPos - offset);
             }
         }
-        
 
     }
 
