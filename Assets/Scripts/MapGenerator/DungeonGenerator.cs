@@ -59,7 +59,7 @@ public class DungeonGenerator : RoomGenerator
         tilemapVisualizer.PaintFloorTiles(floorPositions);
 
         //Create walls
-        //WallGenerator.CreateWalls(floorPositions, tilemapVisualizer);
+        WallGenerator.CreateWalls(floorPositions, tilemapVisualizer);
 
     }
 
