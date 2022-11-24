@@ -76,6 +76,10 @@ public class DungeonGenerator : RoomGenerator
         //Creating kitchen
         Kitchen kitchen = GenerateKitchen(wallPositions);
 
+        //Removing invisible walls
+        wallPositions.ExceptWith(kitchen.floorPos);
+        kitchen.wallPos.ExceptWith(floorPositions);
+
         //Displaying dungeon tiles
         tilemapVisualizer.DisplayDungeon(floorPositions, wallPositions, kitchen);
 
