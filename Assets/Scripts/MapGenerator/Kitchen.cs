@@ -1,23 +1,34 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class Kitchen
 {
     int height, width;
+    int outsideCorridorLength = 10;
     Vector2Int minPos, maxPos;
+    Vector2Int kitchenOffset;
     Vector2 spawnPos;
     public HashSet<Vector2Int> floorPos; //Contains positions of every floor tile
     public HashSet<Vector2Int> wallPos; //Contains positions of every wall tiles
+    public HashSet<Vector2Int> kitchenPos; //Contains positions of kitchen area
 
     public Kitchen(int kitchenHeight, int kitchenWidth, Vector2Int start)
     {
+        //Initializing
         height = kitchenHeight;
         width = kitchenWidth;
         floorPos = new HashSet<Vector2Int>();
-        wallPos = new HashSet<Vector2Int>();    
+        wallPos = new HashSet<Vector2Int>();
+        kitchenPos = new HashSet<Vector2Int>();
+
+        //Calculating kitchen position
+        kitchenOffset = new Vector2Int(-(width / 2), outsideCorridorLength);
+        minPos = start + new Vector2Int(-(width / 2), 0);
+        maxPos = start + new Vector2Int(width / 2, height + outsideCorridorLength);
 
         CreateFloor(start);
         CreateWalls();
@@ -50,20 +61,27 @@ public class Kitchen
     private void CreateFloor(Vector2Int startPos)
     {
         floorPos.Add(startPos); //Adding first tile as floor
-        spawnPos = new Vector2Int(width / 2, height / 2); //Adding spawn position at center of the kitchen
+
+        //Creating outside corridor
+        for(int i = 0; i < outsideCorridorLength; i++)
+        {
+            var newPos = startPos + new Vector2Int(0, i); //Adding a floor tile
+            floorPos.Add(newPos);
+        }
+
+        //spawnPos = new Vector2Int(width / 2, height / 2); //Adding spawn position at center of the kitchen
 
         for (int i = 0; i < width; i++) //Width
         {
             for (int j = 0; j < height; j++) //Height
             {           
                 var newPos = startPos + new Vector2Int(i, j); //Adding a floor tile
-                floorPos.Add(newPos); //Adding tile to list with offset
+                floorPos.Add(newPos + kitchenOffset); //Adding tile to list with offset
             }
         }
 
-        //Saving min and max pos
-        minPos = startPos;
-        maxPos = startPos + new Vector2Int(height, width);
+        //Adding floor positions to kitchen area
+        kitchenPos.AddRange(floorPos);
 
     }
 

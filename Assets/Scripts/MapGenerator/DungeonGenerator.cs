@@ -1,7 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using Unity.Mathematics;
+using Unity.VisualScripting;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -37,11 +41,16 @@ public class DungeonGenerator : RoomGenerator
         //Contains every potentatial position for a room to be created
         HashSet<Vector2Int> potentialRoomPositions = new HashSet<Vector2Int>();
 
+        //Contains every position for kitchen (floor and walls)
+        HashSet<Vector2Int> kitchenPositions = new HashSet<Vector2Int>();
+        kitchenPositions.AddRange(kitchen.floorPos);
+        kitchenPositions.AddRange(kitchen.wallPos);
+
         //Create corridors from the kitchen
-        CreateCorridors(floorPositions, potentialRoomPositions);
+        CreateCorridors(floorPositions, potentialRoomPositions, kitchen);
 
         //Removing kitchen position from potentialRoomPositions
-        potentialRoomPositions.Except(kitchen.floorPos);
+        potentialRoomPositions.Except(kitchenPositions);
 
         //Create rooms from corridors extremities 
         HashSet<Vector2Int> roomPositions = CreateRooms(potentialRoomPositions);
@@ -111,11 +120,12 @@ public class DungeonGenerator : RoomGenerator
     
     }
 
-    private void CreateCorridors(HashSet<Vector2Int> floorPositions, HashSet<Vector2Int> potentialRoomPositions)
+    private void CreateCorridors(HashSet<Vector2Int> floorPositions, HashSet<Vector2Int> potentialRoomPositions, Kitchen kitchen)
     {
-        var currentPos = startPosition;
+        List<Vector2Int> kitchenWallPos = kitchen.wallPos.ToList();
+        var currentPos = kitchenWallPos[UnityEngine.Random.Range(0, kitchenWallPos.Count)]; //Getting a random wall of kitchen to start corridor
 
-        for(int i = 0; i < dungeonParameter.corridorCount; i++)
+        for (int i = 0; i < dungeonParameter.corridorCount; i++)
         {
             var corridor = RandomWalkAlgos.RandomWalkCorridor(currentPos, dungeonParameter.corridorLength);
             currentPos = corridor[corridor.Count - 1]; //Saving last position (at the end of the path)
