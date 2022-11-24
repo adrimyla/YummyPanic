@@ -9,7 +9,22 @@ public class TilemapVisualizer : MonoBehaviour
     [SerializeField]
     private Tilemap floorTilemap, wallTilemap, kitchenTileMap;
     [SerializeField]
-    private TileBase floorTile, wallTop, kitchenTile;
+    private TileBase floorTile, wallTile, kitchenTile;
+
+    public void DisplayDungeon(IEnumerable<Vector2Int> floorPositions, IEnumerable<Vector2Int> wallPositions, Kitchen kitchen)
+    {
+        //Display dungeon floor
+        PaintFloorTiles(floorPositions);
+
+        //Displaying walls
+        PaintWallTiles(wallPositions);
+
+        //Displaying kitchen floor
+        PaintKitchenFloorTiles(kitchen.floorPos);
+
+        //Displaying kitchen walls
+        PaintWallTiles(kitchen.wallPos);
+    }
 
     public void PaintFloorTiles(IEnumerable<Vector2Int> floorPositions)
     {
@@ -29,6 +44,14 @@ public class TilemapVisualizer : MonoBehaviour
         }
     }
 
+    private void PaintWallTiles(IEnumerable<Vector2Int> positions)
+    {
+        foreach (var pos in positions)
+        {
+            PaintSingleBasicWall(pos);
+        }
+    }
+
     private void PaintSingleTile(Tilemap tileMap, TileBase tile, Vector2Int pos)
     {
         var tilePosition = tileMap.WorldToCell((Vector3Int)pos);
@@ -44,6 +67,6 @@ public class TilemapVisualizer : MonoBehaviour
 
     internal void PaintSingleBasicWall(Vector2Int position)
     {
-       PaintSingleTile(wallTilemap, wallTop, position);
+       PaintSingleTile(wallTilemap, wallTile, position);
     }
 }

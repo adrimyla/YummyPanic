@@ -19,7 +19,7 @@ public class DungeonGenerator : RoomGenerator
         CreateDunjeon();
     }
 
-    private void GenerateKitchen(HashSet<Vector2Int> wallPositions)
+    private Kitchen GenerateKitchen(HashSet<Vector2Int> wallPositions)
     {
         //Find a place to create the kitchen (outside rooms)
         Vector2Int kitchenStartPos = FindAStartPositionForKitchen(startPosition, wallPositions);
@@ -27,9 +27,9 @@ public class DungeonGenerator : RoomGenerator
         //Create the kitchen where the player will spawn
         Kitchen kitchen = new Kitchen(dungeonParameter.kitchenHeight, dungeonParameter.kitchenWidth, kitchenStartPos);
         
-        tilemapVisualizer.PaintKitchenFloorTiles(kitchen.floorPos); //Display kitchen floor
-        
-        WallGenerator.CreateWalls(kitchen.floorPos, tilemapVisualizer); //Display kitchen walls   
+        kitchen.wallPos = WallGenerator.CreateWalls(kitchen.floorPos);
+
+        return kitchen;
 
     } 
 
@@ -70,16 +70,14 @@ public class DungeonGenerator : RoomGenerator
         //Update floor positions with room positions (and avoid doublons)
         floorPositions.UnionWith(roomPositions);
 
-        HashSet<Vector2Int> potentialKitchenPositions = new HashSet<Vector2Int>();
-
-        //Display dungeon floor
-        tilemapVisualizer.PaintFloorTiles(floorPositions);
-
-        //Create walls
-        HashSet<Vector2Int> wallPositions = WallGenerator.CreateWalls(floorPositions, tilemapVisualizer);
+        //Create dunjeon walls
+        HashSet<Vector2Int> wallPositions = WallGenerator.CreateWalls(floorPositions);
 
         //Creating kitchen
-        GenerateKitchen(wallPositions);
+        Kitchen kitchen = GenerateKitchen(wallPositions);
+
+        //Displaying dungeon tiles
+        tilemapVisualizer.DisplayDungeon(floorPositions, wallPositions, kitchen);
 
     }
 

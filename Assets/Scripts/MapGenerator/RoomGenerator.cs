@@ -14,7 +14,7 @@ public class RoomGenerator : AbstractDungeonGenerator
     {
         HashSet<Vector2Int> floorPositions = RunRandomWalk(roomParam, startPosition);
         tilemapVisualizer.PaintFloorTiles(floorPositions); //Display floor
-        WallGenerator.CreateWalls(floorPositions,tilemapVisualizer); //Display walls
+        WallGenerator.CreateWalls(floorPositions); //Display walls
     }
 
     protected HashSet<Vector2Int> RunRandomWalk(RoomParameter roomParam, Vector2Int position)

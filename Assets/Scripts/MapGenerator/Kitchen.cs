@@ -28,31 +28,6 @@ public class Kitchen
         maxPos = start + new Vector2Int(width / 2, height + outsideCorridorLength);
 
         CreateFloor(start);
-        CreateWalls();
-    }
-
-    private void CreateWalls()
-    {
-        Vector2Int initPos = new Vector2Int(minPos.x - 1, minPos.y - 1) ;
-        HashSet<Vector2Int> walls = new HashSet<Vector2Int> ();
-        walls.Add(initPos);
-
-        //Top and Bottom
-        for(int i = 0; i < maxPos.y + 2; i++)
-        {
-            walls.Add(initPos + new Vector2Int(i, minPos.x));
-            walls.Add(initPos + new Vector2Int(i, maxPos.x + 1));
-        }
-
-        //Left and Right
-        for (int i = 0; i < maxPos.y + 2; i++)
-        {
-            walls.Add(initPos + new Vector2Int(i, minPos.x));
-            walls.Add(initPos + new Vector2Int(i, maxPos.x + 1));
-        }
-
-        wallPos.UnionWith(walls); //Add new walls to the final list
-     
     }
 
     private void CreateFloor(Vector2Int startPos)
