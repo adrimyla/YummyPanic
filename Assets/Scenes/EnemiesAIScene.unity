@@ -357,6 +357,7 @@ GameObject:
   - component: {fileID: 769347975}
   - component: {fileID: 769347979}
   - component: {fileID: 769347978}
+  - component: {fileID: 769347980}
   m_Layer: 0
   m_Name: Walls
   m_TagString: Untagged
@@ -4521,6 +4522,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &769347980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 769347973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &1094657362
 GameObject:
   m_ObjectHideFlags: 0
@@ -4532,6 +4549,7 @@ GameObject:
   - component: {fileID: 1094657365}
   - component: {fileID: 1094657363}
   - component: {fileID: 1094657364}
+  - component: {fileID: 1094657366}
   m_Layer: 0
   m_Name: Kitchen
   m_TagString: Untagged
@@ -5065,6 +5083,22 @@ Transform:
   m_Father: {fileID: 765726114}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1094657366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094657362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &1130356626
 GameObject:
   m_ObjectHideFlags: 0
@@ -5098,7 +5132,7 @@ MonoBehaviour:
   wallTilemap: {fileID: 769347974}
   kitchenTileMap: {fileID: 1094657363}
   floorTile: {fileID: 11400000, guid: 471853985ed4b5242ad12af71ace0cf6, type: 2}
-  wallTop: {fileID: 11400000, guid: 22c9f328675568942a63b2770a6a63dc, type: 2}
+  wallTile: {fileID: 0}
   kitchenTile: {fileID: 11400000, guid: 9b2ea91fb9970a24d92ba3555a61b11c, type: 2}
 --- !u!4 &1130356628
 Transform:
@@ -5124,6 +5158,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1335725237}
+  - component: {fileID: 1335725239}
+  - component: {fileID: 1335725240}
   m_Layer: 0
   m_Name: NavMesh
   m_TagString: Untagged
@@ -5138,7 +5174,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1335725236}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.70723015}
   m_LocalPosition: {x: 0.2873293, y: 0.085885815, z: -0.026503187}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5146,6 +5182,52 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1335725239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335725236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.33333334
+  m_BuildHeightMesh: 0
+  m_HideEditorLogs: 0
+  m_NavMeshData: {fileID: 0}
+--- !u!114 &1335725240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335725236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae0e0d37a56e124f94a88beb33872a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideByGrid: 0
+  m_UseMeshPrefab: {fileID: 0}
+  m_CompressBounds: 0
+  m_OverrideVector: {x: 1, y: 1, z: 1}
 --- !u!4 &1569831101 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8793594219872014380, guid: cc3e26dba49b32c44ac320af2820151e, type: 3}
@@ -5235,6 +5317,10 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 2157236413348925379, guid: 645b780a8e6c445429e70ca6ae9a1a4f, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2968673086858351742, guid: 645b780a8e6c445429e70ca6ae9a1a4f, type: 3}
       propertyPath: _speed
       value: 2
@@ -5300,6 +5386,7 @@ GameObject:
   - component: {fileID: 1879535446}
   - component: {fileID: 1879535448}
   - component: {fileID: 1879535447}
+  - component: {fileID: 1879535449}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -11013,6 +11100,22 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1879535449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879535445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 0
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &1988964894
 GameObject:
   m_ObjectHideFlags: 0

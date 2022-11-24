@@ -18,7 +18,7 @@ public class FoodDetection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CatchFood();
+        //CatchFood();
     }
 
     void CatchFood()
