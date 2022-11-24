@@ -7,6 +7,7 @@ public class PlayerAttack : MonoBehaviour
     /*
      * Attributs
      */
+    [Header("Statistiques")]
     [SerializeField] private int _damageDealt; // dégâts infligé
     [SerializeField] private float _attackDelay = 0.25f; // délais entre les dégâts
     [HideInInspector] public GameObject target; // cible du joueur. A modifier plus tard pour prendre en compte les attaques en AOE
@@ -50,7 +51,9 @@ public class PlayerAttack : MonoBehaviour
     void AttackTarget()
     {
         target.GetComponent<GluttonHealth>().TakeDamage(this._damageDealt);
+        // Affichages
         _damageDisplayer.ShowDamage(_damageDealt);
+        //_damageDisplayer.SetDamageColor(target.GetComponent<SpriteRenderer>());
         Debug.Log("J'attaque");
         _canAttack = false;
     }

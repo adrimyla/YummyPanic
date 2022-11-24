@@ -1,8 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using Unity.Mathematics;
+using Unity.VisualScripting;
+using UnityEditor.VersionControl;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class DungeonGenerator : RoomGenerator
 {
@@ -10,27 +15,73 @@ public class DungeonGenerator : RoomGenerator
     protected DungeonParameter dungeonParameter;
 
     protected override void RunProceduralGeneration()
-    {
-        GenerateCorridors();
+    {       
+        CreateDunjeon();
     }
 
-    private void GenerateCorridors()
+    private Kitchen GenerateKitchen(HashSet<Vector2Int> wallPositions)
     {
+        //Find a place to create the kitchen (outside rooms)
+        Vector2Int kitchenStartPos = FindAStartPositionForKitchen(startPosition, wallPositions);
+
+        //Create the kitchen where the player will spawn
+        Kitchen kitchen = new Kitchen(dungeonParameter.kitchenHeight, dungeonParameter.kitchenWidth, kitchenStartPos);
+        
+        kitchen.wallPos = WallGenerator.CreateWalls(kitchen.floorPos);
+
+        return kitchen;
+
+    } 
+
+    private Vector2Int FindAStartPositionForKitchen(Vector2Int startPosition, HashSet<Vector2Int> wallPositions)
+    {
+        var currentPos = startPosition;
+
+        //Find a wall going up
+        while (!wallPositions.Contains(currentPos))
+        {
+            currentPos += Vector2Int.up; //If this is not a wall, we go up to find one
+        }
+
+        return currentPos;
+    }
+
+    private void CreateDunjeon()
+    {
+
+        //Contains every floor tiles positions
         HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
+
+        //Contains every potentatial position for a room to be created
         HashSet<Vector2Int> potentialRoomPositions = new HashSet<Vector2Int>();
 
+        //Create corridors from the kitchen
         CreateCorridors(floorPositions, potentialRoomPositions);
 
+        //Create rooms from corridors extremities 
         HashSet<Vector2Int> roomPositions = CreateRooms(potentialRoomPositions);
 
+        //Find where corridors lead nowhere
         List<Vector2Int> deadEnds = FindAllDeadEnds(floorPositions);
 
+        //Create rooms where corridors end
         CreateRoomsAtDeadEnds(deadEnds, roomPositions);
 
-        floorPositions.UnionWith(roomPositions); //Avoid room doublons
+        //Update floor positions with room positions (and avoid doublons)
+        floorPositions.UnionWith(roomPositions);
 
-        tilemapVisualizer.PaintFloorTiles(floorPositions);
-        WallGenerator.CreateWalls(floorPositions, tilemapVisualizer);
+        //Create dunjeon walls
+        HashSet<Vector2Int> wallPositions = WallGenerator.CreateWalls(floorPositions);
+
+        //Creating kitchen
+        Kitchen kitchen = GenerateKitchen(wallPositions);
+
+        //Removing invisible walls
+        wallPositions.ExceptWith(kitchen.floorPos);
+        kitchen.wallPos.ExceptWith(floorPositions);
+
+        //Displaying dungeon tiles
+        tilemapVisualizer.DisplayDungeon(floorPositions, wallPositions, kitchen);
 
     }
 
@@ -52,7 +103,7 @@ public class DungeonGenerator : RoomGenerator
         foreach(var pos in floorPositions)
         {
             int neighboursCount = 0;
-            foreach(var direction in Direction2D.cardinalDirectionList)
+            foreach(var direction in Direction2D.fourDirections)
             {
                 if (floorPositions.Contains(pos + direction)) //If there is floor next to this floor
                     neighboursCount++;                
@@ -85,9 +136,8 @@ public class DungeonGenerator : RoomGenerator
     private void CreateCorridors(HashSet<Vector2Int> floorPositions, HashSet<Vector2Int> potentialRoomPositions)
     {
         var currentPos = startPosition;
-        potentialRoomPositions.Add(currentPos); //Adding actual position to potential room position
 
-        for(int i = 0; i < dungeonParameter.corridorCount; i++)
+        for (int i = 0; i < dungeonParameter.corridorCount; i++)
         {
             var corridor = RandomWalkAlgos.RandomWalkCorridor(currentPos, dungeonParameter.corridorLength);
             currentPos = corridor[corridor.Count - 1]; //Saving last position (at the end of the path)

@@ -8,6 +8,7 @@ public class DamageDisplayer : MonoBehaviour
 {
     [SerializeField] private GameObject _damageText;
     [SerializeField] private PlayerAttack _playerAttack;
+    [SerializeField] private float damageFilterDuration;
 
     private void Update()
     {
@@ -26,5 +27,14 @@ public class DamageDisplayer : MonoBehaviour
         }
     }
 
+    public IEnumerator SetDamageColor(SpriteRenderer targetRenderer)
+    {
+        Color defaultColor = targetRenderer.color;
+        // Ajout du filtre rougeâtre
+        targetRenderer.color = new Color(1f, 0.2f, 0.2f);
+        yield return new WaitForSeconds(damageFilterDuration);
+        // Passage vers la couleur par défaut
+        targetRenderer.color = defaultColor;
+    }
     
 }

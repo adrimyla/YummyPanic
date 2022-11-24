@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc3998209a3c41347936f607f0a3600b, type: 3}
   m_Name: DungeonParam_SmallDungeon
   m_EditorClassIdentifier: 
-  roomParam: {fileID: 11400000, guid: dbfadac9f883a154098f65d6231c299c, type: 2}
+  kitchenHeight: 7
+  kitchenWidth: 10
   corridorLength: 20
-  corridorCount: 5
+  corridorCount: 10
+  roomParam: {fileID: 11400000, guid: dbfadac9f883a154098f65d6231c299c, type: 2}
   roomPercent: 0.8
