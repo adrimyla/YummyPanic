@@ -15,13 +15,13 @@ public class DungeonGenerator : RoomGenerator
     protected DungeonParameter dungeonParameter;
 
     protected override void RunProceduralGeneration()
-    {
-        
-        GenerateRoomsAndCorridors();
+    {       
+        CreateDunjeon();
     }
 
-    private Kitchen GenerateKitchen(HashSet<Vector2Int> wallPositions)
+    private void GenerateKitchen(HashSet<Vector2Int> wallPositions)
     {
+        //Find a place to create the kitchen (outside rooms)
         Vector2Int kitchenStartPos = FindAStartPositionForKitchen(startPosition, wallPositions);
 
         //Create the kitchen where the player will spawn
@@ -31,23 +31,22 @@ public class DungeonGenerator : RoomGenerator
         
         WallGenerator.CreateWalls(kitchen.floorPos, tilemapVisualizer); //Display kitchen walls   
 
-        return kitchen;
-    }
+    } 
 
     private Vector2Int FindAStartPositionForKitchen(Vector2Int startPosition, HashSet<Vector2Int> wallPositions)
     {
         var currentPos = startPosition;
 
         //Find a wall going up
-        while (!wallPositions.Contains(currentPos)) //TODO : Add another break
+        while (!wallPositions.Contains(currentPos))
         {
-            currentPos += Vector2Int.up;
+            currentPos += Vector2Int.up; //If this is not a wall, we go up to find one
         }
 
         return currentPos;
     }
 
-    private void GenerateRoomsAndCorridors()
+    private void CreateDunjeon()
     {
 
         //Contains every floor tiles positions
@@ -80,7 +79,7 @@ public class DungeonGenerator : RoomGenerator
         HashSet<Vector2Int> wallPositions = WallGenerator.CreateWalls(floorPositions, tilemapVisualizer);
 
         //Creating kitchen
-        Kitchen kitchen = GenerateKitchen(wallPositions);
+        GenerateKitchen(wallPositions);
 
     }
 
