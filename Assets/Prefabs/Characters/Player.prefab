@@ -310,3 +310,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageText: {fileID: 1482745223337697265, guid: a089006996bc49c459b20d72ed82d81d, type: 3}
   _playerAttack: {fileID: 7939061105778768409}
+  damageFilterDuration: 2
