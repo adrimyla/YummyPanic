@@ -5,13 +5,15 @@ using UnityEngine;
 
 public static class WallGenerator
 {
-    public static void CreateWalls(HashSet<Vector2Int> floorPositions, TilemapVisualizer tilemapVisualizer)
+    public static HashSet<Vector2Int> CreateWalls(HashSet<Vector2Int> floorPositions, TilemapVisualizer tilemapVisualizer)
     {
         var basicWallsPositions = FindWallsInDirections(floorPositions, Direction2D.fourDirections);
         foreach(var position in basicWallsPositions)
         {
             tilemapVisualizer.PaintSingleBasicWall(position);
         }
+
+        return basicWallsPositions;
     }
 
     //Find out if a tile is a wall

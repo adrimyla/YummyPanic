@@ -15,6 +15,6 @@ MonoBehaviour:
   kitchenHeight: 7
   kitchenWidth: 10
   corridorLength: 20
-  corridorCount: 5
+  corridorCount: 10
   roomParam: {fileID: 11400000, guid: dbfadac9f883a154098f65d6231c299c, type: 2}
   roomPercent: 0.8

@@ -10,8 +10,6 @@ public class Kitchen
     int height, width;
     int outsideCorridorLength = 10;
     Vector2Int minPos, maxPos;
-    Vector2Int kitchenOffset;
-    Vector2 spawnPos;
     public HashSet<Vector2Int> floorPos; //Contains positions of every floor tile
     public HashSet<Vector2Int> wallPos; //Contains positions of every wall tiles
     public HashSet<Vector2Int> kitchenPos; //Contains positions of kitchen area
@@ -25,8 +23,7 @@ public class Kitchen
         wallPos = new HashSet<Vector2Int>();
         kitchenPos = new HashSet<Vector2Int>();
 
-        //Calculating kitchen position
-        kitchenOffset = new Vector2Int(-(width / 2), outsideCorridorLength);
+        //Calculating kitchen area
         minPos = start + new Vector2Int(-(width / 2), 0);
         maxPos = start + new Vector2Int(width / 2, height + outsideCorridorLength);
 
@@ -69,14 +66,13 @@ public class Kitchen
             floorPos.Add(newPos);
         }
 
-        //spawnPos = new Vector2Int(width / 2, height / 2); //Adding spawn position at center of the kitchen
-
+        Vector2Int offset = new Vector2Int(-(width / 2), outsideCorridorLength); //Placing kitchen room at the end of entry corridor
         for (int i = 0; i < width; i++) //Width
         {
             for (int j = 0; j < height; j++) //Height
             {           
                 var newPos = startPos + new Vector2Int(i, j); //Adding a floor tile
-                floorPos.Add(newPos + kitchenOffset); //Adding tile to list with offset
+                floorPos.Add(newPos + offset); //Adding tile to list with offset
             }
         }
 
