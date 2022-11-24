@@ -14,6 +14,11 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        UpdateGameState(GameState.INTRO);
+    }
+
     public void UpdateGameState(GameState newState)
     {
         state = newState;
@@ -26,7 +31,35 @@ public class GameManager : MonoBehaviour
             case GameState.MAIN_MENU:
                 HandleMainMenu();
                 break;
+            case GameState.PLAYING:
+                HandlePlayMode();
+                break;
+            case GameState.PAUSE:
+                HandlePauseMode();
+                break;
+            case GameState.GAME_OVER:
+                HandleGameOver();
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
+
+        OnGameStateChanged(newState);
+    }
+
+    private void HandleGameOver()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void HandlePauseMode()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void HandlePlayMode()
+    {
+        throw new NotImplementedException();
     }
 
     private void HandleMainMenu()
@@ -46,6 +79,5 @@ public enum GameState
     MAIN_MENU,
     PLAYING,
     PAUSE,
-    WIN,
     GAME_OVER
 }
