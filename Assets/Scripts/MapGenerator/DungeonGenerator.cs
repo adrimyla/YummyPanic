@@ -14,9 +14,9 @@ public class DungeonGenerator : RoomGenerator
     [SerializeField]
     protected DungeonParameter dungeonParameter;
 
-    protected override void RunProceduralGeneration()
+    protected override Dungeon RunProceduralGeneration()
     {       
-        CreateDunjeon();
+        return CreateDunjeon();
     }
 
     private Kitchen GenerateKitchen(HashSet<Vector2Int> wallPositions)
@@ -46,43 +46,39 @@ public class DungeonGenerator : RoomGenerator
         return currentPos;
     }
 
-    private void CreateDunjeon()
+    private Dungeon CreateDunjeon()
     {
-
-        //Contains every floor tiles positions
-        HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
-
-        //Contains every potentatial position for a room to be created
-        HashSet<Vector2Int> potentialRoomPositions = new HashSet<Vector2Int>();
+        Dungeon dg = new Dungeon();
 
         //Create corridors from the kitchen
-        CreateCorridors(floorPositions, potentialRoomPositions);
+        CreateCorridors(dg.floorPositions, dg.potentialRoomPositions);
 
         //Create rooms from corridors extremities 
-        HashSet<Vector2Int> roomPositions = CreateRooms(potentialRoomPositions);
+        dg.roomPositions = CreateRooms(dg.potentialRoomPositions);
 
         //Find where corridors lead nowhere
-        List<Vector2Int> deadEnds = FindAllDeadEnds(floorPositions);
+        dg.deadEnds = FindAllDeadEnds(dg.floorPositions);
 
         //Create rooms where corridors end
-        CreateRoomsAtDeadEnds(deadEnds, roomPositions);
+        CreateRoomsAtDeadEnds(dg.deadEnds, dg.roomPositions);
 
         //Update floor positions with room positions (and avoid doublons)
-        floorPositions.UnionWith(roomPositions);
+        dg.floorPositions.UnionWith(dg.roomPositions);
 
-        //Create dunjeon walls
-        HashSet<Vector2Int> wallPositions = WallGenerator.CreateWalls(floorPositions);
+        //Create dungeon walls
+        dg.wallPositions = WallGenerator.CreateWalls(dg.floorPositions);
 
         //Creating kitchen
-        Kitchen kitchen = GenerateKitchen(wallPositions);
+        dg.kitchen = GenerateKitchen(dg.wallPositions);
 
         //Removing invisible walls
-        wallPositions.ExceptWith(kitchen.floorPos);
-        kitchen.wallPos.ExceptWith(floorPositions);
+        dg.wallPositions.ExceptWith(dg.kitchen.floorPos);
+        dg.kitchen.wallPos.ExceptWith(dg.floorPositions);
 
         //Displaying dungeon tiles
-        tilemapVisualizer.DisplayDungeon(floorPositions, wallPositions, kitchen);
+        tilemapVisualizer.DisplayDungeon(dg.floorPositions, dg.wallPositions, dg.kitchen);
 
+        return new Dungeon();
     }
 
     private void CreateRoomsAtDeadEnds(List<Vector2Int> deadEnds, HashSet<Vector2Int> roomFloors)
