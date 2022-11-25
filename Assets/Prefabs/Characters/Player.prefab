@@ -44,7 +44,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1413253516957084977}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -174,7 +174,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -6598946016331564889, guid: 92381f51f2a7ac8498af98307328857a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -295,7 +295,7 @@ MonoBehaviour:
   _damageDealt: 1
   _attackDelay: 0.5
   target: {fileID: 0}
-  _damageDisplayer: {fileID: 0}
+  _damageDisplayer: {fileID: 3005691293853521232}
 --- !u!114 &3005691293853521232
 MonoBehaviour:
   m_ObjectHideFlags: 0

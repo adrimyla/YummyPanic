@@ -5,14 +5,16 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
 
-    public Transform followTransform;
+    public Transform objectToFollow;
 
+    public Transform ObjectToFollow { get => objectToFollow; set => objectToFollow = value; }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        this.transform.position = new Vector3(followTransform.position.x, followTransform.position.y, this.transform.position.z);
-
+        this.transform.position = new Vector3(ObjectToFollow.position.x, ObjectToFollow.position.y, this.transform.position.z);
 
     }
+
+
 }

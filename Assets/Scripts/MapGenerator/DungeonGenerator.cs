@@ -78,7 +78,7 @@ public class DungeonGenerator : RoomGenerator
         //Displaying dungeon tiles
         tilemapVisualizer.DisplayDungeon(dg.floorPositions, dg.wallPositions, dg.kitchen);
 
-        return new Dungeon();
+        return dg;
     }
 
     private void CreateRoomsAtDeadEnds(List<Vector2Int> deadEnds, HashSet<Vector2Int> roomFloors)

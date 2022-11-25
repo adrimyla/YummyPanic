@@ -11,11 +11,15 @@ public class GameManager : MonoBehaviour
     public static event Action<GameState> OnGameStateChanged;
 
     [Header("Scene")]
+    public GameObject setup;
     public TilemapVisualizer tilemapVisualizer;
     public DungeonGenerator dungeon;
 
     [Header("Canvas")]
     public GameObject mainMenuCanvas;
+
+    [Header("Camera")]
+    public CameraFollow camFollow;
 
     [Header("Player")]
     public GameObject playerPrefab;
@@ -79,26 +83,33 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Loading game ...");
 
-        //STEP 1 : Creating tile maps and assigning it to TileMapVisualizer
+        //====== STEP 1 : Creating tile maps and assigning it to TileMapVisualizer ======
 
-        //STEP  2 : Generating dungeon and kitchen
+        //====== STEP  2 : Generating dungeon and kitchen ======
         Dungeon dg = dungeon.GenerateDungeon();
 
-        //STEP 3 : Placing player at spawn
+        //====== STEP 3 : Placing player at spawn ======         
 
-        //Getting kitchen position
+        //Getting player start pos
+        Vector2Int playerStartPos2D = dg.kitchen.playerPos;
+        Vector3 playerStartPos3D = new Vector3((float) playerStartPos2D.x, (float) playerStartPos2D.y, 0);
 
-        Instantiate(playerPrefab);
+        //Instantiate player
+        GameObject playerGO = Instantiate(playerPrefab, playerStartPos3D, Quaternion.identity);
+        playerGO.transform.parent = setup.transform;
 
-        //STEP 4 : Placing gluttons on map
+        //Adding player as object to follow by camera
+        camFollow.ObjectToFollow = playerGO.transform;
 
-        //STEP 5 : Placing food, fake food and objects on map
+        //====== STEP 4 : Placing gluttons on map ======
 
-        //STEP 6 : Placing gluttons burrows (terriers)
+        //====== STEP 5 : Placing food, fake food and objects on map ======
 
-        //STEP 8 : Init player and gluttons stats (use default values of prefab)
+        //====== STEP 6 : Placing gluttons burrows (terriers) ======
 
-        //STEP 9 : Init receips and countdown 
+        //====== STEP 8 : Init player and gluttons stats (use default values of prefab) ======
+
+        //====== STEP 9 : Init receips and countdown ======
 
         UpdateGameState(GameState.PLAYING); //When loading complete, we start the game !
     }
