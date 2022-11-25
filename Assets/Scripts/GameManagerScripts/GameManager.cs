@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Scene")]
     public TilemapVisualizer tilemapVisualizer;
-    public GameObject grid;
+    public DungeonGenerator dungeon;
 
     [Header("Canvas")]
     public GameObject mainMenuCanvas;
@@ -82,8 +82,10 @@ public class GameManager : MonoBehaviour
         //STEP 1 : Creating tile maps and assigning it to TileMapVisualizer
 
         //STEP  2 : Generating dungeon and kitchen
+        dungeon.GenerateDungeon();
 
         //STEP 3 : Placing player at spawn
+
 
         //STEP 4 : Placing gluttons on map
 
