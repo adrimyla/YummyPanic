@@ -22,15 +22,9 @@ public class MainMenuManager : MonoBehaviour
         mainMenu.SetActive(state == GameState.MAIN_MENU); // Display the main menu if game state is MAIN_MENU  
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void OnPlayClick()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        mainMenu.SetActive(false);
+        GameManager.Instance.UpdateGameState(GameState.PLAYING);
     }
 }

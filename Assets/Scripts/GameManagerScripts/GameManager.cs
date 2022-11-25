@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleMainMenu()
     {
-        throw new NotImplementedException();
+        Time.timeScale = 0;
     }
 
     private void HandleLoading()
@@ -117,11 +117,13 @@ public class GameManager : MonoBehaviour
     private void HandlePlayMode()
     {
         Debug.Log("Playing !");
+        Time.timeScale = 1;
         throw new NotImplementedException();
     }
 
     private void HandlePauseMode()
     {
+        Time.timeScale = 0;
         throw new NotImplementedException();
     }
 
