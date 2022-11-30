@@ -29,9 +29,12 @@ public class GameManager : MonoBehaviour
     public GameObject playerPrefab;
 
     [Header("Gluttons")]
-    public GameObject gluttonPrefab;
+    public GameObject gluttonPrefab;   
     [Range (2, 30)]    
     public int gluttonCount = 10;
+    public GameObject burrowPrefab;
+    [Range(2, 10)]
+    public int burrowCount = 10;
 
     [Header("Objects")]
     public int foodTotalCount = 10;
@@ -153,19 +156,22 @@ public class GameManager : MonoBehaviour
 
         //====== STEP 3 : Placing gluttons on map ======
 
-        GameObject gluttonsContainerGO = Instantiate(new GameObject(), setup.transform);
+        GameObject gluttonsContainerGO = new GameObject();
         gluttonsContainerGO.name = "GLUTTONS";
+        gluttonsContainerGO.transform.parent = setup.transform;   
         SpawningGluttons(dg, gluttonsContainerGO);
 
         //====== STEP 4 : Placing gluttons burrows (terriers) ======
-        
-        GameObject burrowsContainer = Instantiate(new GameObject(), setup.transform);
+
+        GameObject burrowsContainer = new GameObject();
+        burrowsContainer.transform.parent = setup.transform;
         burrowsContainer.name = "BURROWS";
-        //SpawningGluttonsBurrows(burrowsContainer);
+        SpawningGluttonsBurrows(dg, burrowsContainer);
 
         //====== STEP 5 : Placing food, fake food and objects on map ======
-        
-        GameObject objectsContainerGO = Instantiate(new GameObject(), setup.transform);
+
+        GameObject objectsContainerGO = new GameObject();
+        objectsContainerGO.transform.parent = setup.transform;
         objectsContainerGO.name = "OBJECTS";
         SpawningFood(dg, objectsContainerGO);
 
@@ -176,14 +182,23 @@ public class GameManager : MonoBehaviour
         UpdateGameState(GameState.PLAYING); //When loading complete, we start the game !
     }
 
-    private void SpawningGluttonsBurrows(GameObject burrowsContainer)
+    private void SpawningGluttonsBurrows(Dungeon dg, GameObject burrowsContainer)
     {
-        throw new NotImplementedException();
+        for (int i = 0; i < burrowCount; i++)
+        {
+            //Getting a random spawn location            
+            Vector3 pos = FindFreeLocation(dg.freeFloorPositions);
+
+            GameObject burrowGO = Instantiate(burrowPrefab, pos, Quaternion.identity);
+            burrowGO.transform.parent = burrowsContainer.transform;
+
+        }
     }
 
     private void SpawningFood(Dungeon dg, GameObject objectsContainerGO)
     {
-        GameObject foodContainer = Instantiate(new GameObject(), objectsContainerGO.transform);
+        GameObject foodContainer = new GameObject();
+        foodContainer.transform.parent = objectsContainerGO.transform;
         foodContainer.name = "FOOD";
         for (int i = 0; i < foodTotalCount; i++)
         {
