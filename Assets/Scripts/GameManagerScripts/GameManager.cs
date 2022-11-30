@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Canvas")]
     public GameObject mainMenuCanvas;
+    public GameObject loadingScreen;
+    public GameObject pauseMenuCanvas;
 
     [Header("Camera")]
     public CameraFollow camFollow;
@@ -35,6 +37,14 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         UpdateGameState(state);
+    }
+    private void Update()
+    {
+        //Input for Pause Menu
+        if (Input.GetKeyDown(KeyCode.Escape) && state == GameState.PLAYING)
+        {
+            UpdateGameState(GameState.PAUSE);
+        }
     }
 
     public void UpdateGameState(GameState newState)
@@ -72,7 +82,12 @@ public class GameManager : MonoBehaviour
 
     private void HandleIntro()
     {
+        // Init game canvas
+        loadingScreen.SetActive(false);
+        mainMenuCanvas.SetActive(false);
+
         //TODO : CINEMATIQUE D'INTRODUCTION
+
         UpdateGameState(GameState.MAIN_MENU);
     }
 
@@ -84,6 +99,8 @@ public class GameManager : MonoBehaviour
     private void HandleLoading()
     {
         Debug.Log("Loading game ...");
+
+        loadingScreen.SetActive(true);
 
         //====== STEP 1 : Creating tile maps and assigning it to TileMapVisualizer ======
 
@@ -118,15 +135,14 @@ public class GameManager : MonoBehaviour
 
     private void HandlePlayMode()
     {
-        throw new NotImplementedException();
         Debug.Log("Playing !");
-        Time.timeScale = 1;        
+        Time.timeScale = 1;
+        loadingScreen.SetActive(false);
     }
 
     private void HandlePauseMode()
     {
-        Time.timeScale = 0;
-        throw new NotImplementedException();
+        Time.timeScale = 0;        
     }
 
     private void HandleGameOver()
