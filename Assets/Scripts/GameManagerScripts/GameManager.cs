@@ -1,8 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
+using Vector3 = UnityEngine.Vector3;
 
 public class GameManager : MonoBehaviour
 {
@@ -30,7 +33,13 @@ public class GameManager : MonoBehaviour
     [Range (2, 30)]    
     public int gluttonCount = 10;
 
-    
+    [Header("Objects")]
+    public int foodTotalCount = 10;
+    public List<GameObject> food;
+    public int fakeFoodTotalCount = 10;
+    public List<GameObject> fakeFood;
+    public int bonusTotalCount = 10;
+    public List<GameObject> bonus;
 
     void Awake()
     {
@@ -134,44 +143,78 @@ public class GameManager : MonoBehaviour
 
         loadingScreen.SetActive(true);
 
-        //====== STEP 1 : Creating tile maps and assigning it to TileMapVisualizer ======
-
-        //====== STEP  2 : Generating dungeon and kitchen ======
+        //====== STEP  1 : Generating dungeon and kitchen ======
         
         Dungeon dg = dungeon.GenerateDungeon();
 
-        //====== STEP 3 : Placing player at spawn ======         
+        //====== STEP 2 : Placing player at spawn ======         
 
         SpawningPlayer(dg);
 
-        //====== STEP 4 : Placing gluttons on map ======
+        //====== STEP 3 : Placing gluttons on map ======
 
-        SpawningGluttons(dg);
+        GameObject gluttonsContainerGO = Instantiate(new GameObject("Gluttons"), setup.transform);
+        SpawningGluttons(dg, gluttonsContainerGO);
+
+        //====== STEP 4 : Placing gluttons burrows (terriers) ======
+        
+        GameObject burrowsContainer = Instantiate(new GameObject("Burrows"), setup.transform);
+        //SpawningGluttonsBurrows(burrowsContainer);
 
         //====== STEP 5 : Placing food, fake food and objects on map ======
+        
+        GameObject objectsContainerGO = Instantiate(new GameObject("Objects"), setup.transform);
+        SpawningFood(dg, objectsContainerGO);
 
-        //====== STEP 6 : Placing gluttons burrows (terriers) ======
+        //====== STEP 6 : Init player and gluttons stats (use default values of prefab) ======
 
-        //====== STEP 8 : Init player and gluttons stats (use default values of prefab) ======
-
-        //====== STEP 9 : Init receips and countdown ======
+        //====== STEP 7 : Init receips and countdown ======
 
         UpdateGameState(GameState.PLAYING); //When loading complete, we start the game !
     }
 
-    private void SpawningGluttons(Dungeon dg)
+    private void SpawningGluttonsBurrows(GameObject burrowsContainer)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void SpawningFood(Dungeon dg, GameObject objectsContainerGO)
+    {
+        GameObject foodContainer = Instantiate(new GameObject("Food"), objectsContainerGO.transform);
+        for (int i = 0; i < foodTotalCount; i++)
+        {
+            //Getting a random spawn location            
+            Vector3 spawnPos3D = FindFreeLocation(dg.freeFloorPositions);
+
+            //Getting a random element in food
+            GameObject foodPrefab = food[Random.Range(0, food.Count)];
+            GameObject foodGO = Instantiate(foodPrefab, spawnPos3D, Quaternion.identity);
+            foodGO.transform.parent = foodContainer.transform;
+
+        }
+    }
+
+    private void SpawningGluttons(Dungeon dg, GameObject gluttonsContainerGO)
     {   
-        //Getting random position for gluttons
         for(int i = 0; i < gluttonCount; i++)
         {
-            Vector2Int spawnPos2D = dg.freeFloorPositions[(Random.Range(0, dg.freeFloorPositions.Count))];
-            dg.freeFloorPositions.Remove(spawnPos2D);
-
-            Vector3 spawnPos3D = new Vector3((float)spawnPos2D.x, (float)spawnPos2D.y, 0);
-
+            //Getting a random spawn location
+            Vector3 spawnPos3D = FindFreeLocation(dg.freeFloorPositions);
+            
+            //Instantiate
             GameObject gluttonGO = Instantiate(gluttonPrefab, spawnPos3D, Quaternion.identity);
-            gluttonGO.transform.parent = setup.transform;
+            gluttonGO.transform.parent = gluttonsContainerGO.transform;
         }
+    }
+
+    private Vector3 FindFreeLocation(List<Vector2Int> posList2DInt)
+    {
+        
+        Vector2Int spawnPos2D = posList2DInt[(Random.Range(0, posList2DInt.Count))];
+        Vector3 pos = Tool.Vector2IntToVector3(spawnPos2D);        
+        posList2DInt.Remove(spawnPos2D); //Removing used position
+
+        return pos;
     }
 
     private void SpawningPlayer(Dungeon dg)
