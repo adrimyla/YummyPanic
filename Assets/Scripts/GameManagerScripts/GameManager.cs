@@ -40,10 +40,16 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        //Input for Pause Menu
+        //Input to enter Pause Menu
         if (Input.GetKeyDown(KeyCode.Escape) && state == GameState.PLAYING)
         {
             UpdateGameState(GameState.PAUSE);
+        }
+
+        //Input to exit Pause Menu
+        else if (Input.GetKeyDown(KeyCode.Escape) && state == GameState.PAUSE)
+        {
+            UpdateGameState(GameState.PLAYING);
         }
     }
 
