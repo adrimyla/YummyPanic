@@ -29,7 +29,7 @@ public class Kitchen
         maxPos = start + new Vector2Int(width / 2, height + outsideCorridorLength);
 
         //Define player position
-        playerPos = start;
+        playerPos = start + new Vector2Int(0, outsideCorridorLength + height/2);
 
         CreateFloor(start);
     }
