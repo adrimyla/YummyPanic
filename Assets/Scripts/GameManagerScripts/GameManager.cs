@@ -80,10 +80,19 @@ public class GameManager : MonoBehaviour
             case GameState.GAME_OVER:
                 HandleGameOver();
                 break;
+            case GameState.EXIT_GAME:
+                HandleExitGame();
+                break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
        
+    }
+
+    private void HandleExitGame()
+    {
+        Debug.Log("Exiting game");
+        Application.Quit();
     }
 
     private void HandleIntro()
@@ -164,7 +173,8 @@ public enum GameState
     LOADING,
     PLAYING,
     PAUSE,
-    GAME_OVER
+    GAME_OVER,
+    EXIT_GAME
 }
 
 

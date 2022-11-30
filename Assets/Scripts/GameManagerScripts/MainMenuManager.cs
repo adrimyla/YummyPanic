@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MenuManager : MonoBehaviour
+public class MainMenuManager : MonoBehaviour
 {
     public GameObject mainMenu;
 
@@ -25,5 +25,9 @@ public class MenuManager : MonoBehaviour
     public void OnPlayClick()
     {
         GameManager.Instance.UpdateGameState(GameState.LOADING);
+    }
+    public void OnExitClick()
+    {
+        GameManager.Instance.UpdateGameState(GameState.EXIT_GAME);
     }
 }
