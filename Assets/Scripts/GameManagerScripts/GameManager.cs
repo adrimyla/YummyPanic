@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -26,6 +27,10 @@ public class GameManager : MonoBehaviour
 
     [Header("Gluttons")]
     public GameObject gluttonPrefab;
+    [Range (2, 30)]    
+    public int gluttonCount = 10;
+
+    
 
     void Awake()
     {
@@ -106,6 +111,23 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
     }
 
+    private void HandlePlayMode()
+    {
+        Debug.Log("Playing !");
+        Time.timeScale = 1;
+        loadingScreen.SetActive(false);
+    }
+
+    private void HandlePauseMode()
+    {
+        Time.timeScale = 0;
+    }
+
+    private void HandleGameOver()
+    {
+        throw new NotImplementedException();
+    }
+
     private void HandleLoading()
     {
         Debug.Log("Loading game ...");
@@ -115,22 +137,16 @@ public class GameManager : MonoBehaviour
         //====== STEP 1 : Creating tile maps and assigning it to TileMapVisualizer ======
 
         //====== STEP  2 : Generating dungeon and kitchen ======
+        
         Dungeon dg = dungeon.GenerateDungeon();
 
         //====== STEP 3 : Placing player at spawn ======         
 
-        //Getting player start pos
-        Vector2Int playerStartPos2D = dg.kitchen.playerPos;
-        Vector3 playerStartPos3D = new Vector3((float) playerStartPos2D.x, (float) playerStartPos2D.y, 0);
-
-        //Instantiate player
-        GameObject playerGO = Instantiate(playerPrefab, playerStartPos3D, Quaternion.identity);
-        playerGO.transform.parent = setup.transform;
-
-        //Adding player as object to follow by camera
-        camFollow.ObjectToFollow = playerGO.transform;
+        SpawningPlayer(dg);
 
         //====== STEP 4 : Placing gluttons on map ======
+
+        SpawningGluttons(dg);
 
         //====== STEP 5 : Placing food, fake food and objects on map ======
 
@@ -143,22 +159,35 @@ public class GameManager : MonoBehaviour
         UpdateGameState(GameState.PLAYING); //When loading complete, we start the game !
     }
 
-    private void HandlePlayMode()
-    {
-        Debug.Log("Playing !");
-        Time.timeScale = 1;
-        loadingScreen.SetActive(false);
+    private void SpawningGluttons(Dungeon dg)
+    {   
+        //Getting random position for gluttons
+        for(int i = 0; i < gluttonCount; i++)
+        {
+            Vector2Int spawnPos2D = dg.freeFloorPositions[(Random.Range(0, dg.freeFloorPositions.Count))];
+            dg.freeFloorPositions.Remove(spawnPos2D);
+
+            Vector3 spawnPos3D = new Vector3((float)spawnPos2D.x, (float)spawnPos2D.y, 0);
+
+            GameObject gluttonGO = Instantiate(gluttonPrefab, spawnPos3D, Quaternion.identity);
+            gluttonGO.transform.parent = setup.transform;
+        }
     }
 
-    private void HandlePauseMode()
+    private void SpawningPlayer(Dungeon dg)
     {
-        Time.timeScale = 0;        
+        //Getting player start pos
+        Vector2Int playerStartPos2D = dg.kitchen.playerPos;
+        Vector3 playerStartPos3D = new Vector3((float)playerStartPos2D.x, (float)playerStartPos2D.y, 0);
+
+        //Instantiate player
+        GameObject playerGO = Instantiate(playerPrefab, playerStartPos3D, Quaternion.identity);
+        playerGO.transform.parent = setup.transform;
+
+        //Adding player as object to follow by camera
+        camFollow.ObjectToFollow = playerGO.transform;
     }
 
-    private void HandleGameOver()
-    {
-        throw new NotImplementedException();
-    }
 
 }
 public enum GameState

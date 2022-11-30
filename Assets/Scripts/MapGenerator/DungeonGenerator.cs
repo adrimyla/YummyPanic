@@ -64,6 +64,12 @@ public class DungeonGenerator : RoomGenerator
         //Update floor positions with room positions (and avoid doublons)
         dg.floorPositions.UnionWith(dg.roomPositions);
 
+        //Init free floor positions
+        foreach (Vector2Int pos in dg.floorPositions)
+        {
+            dg.freeFloorPositions.Add(pos);
+        }
+
         //Create dungeon walls
         dg.wallPositions = WallGenerator.CreateWalls(dg.floorPositions);
 
