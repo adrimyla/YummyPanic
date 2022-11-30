@@ -153,17 +153,20 @@ public class GameManager : MonoBehaviour
 
         //====== STEP 3 : Placing gluttons on map ======
 
-        GameObject gluttonsContainerGO = Instantiate(new GameObject("Gluttons"), setup.transform);
+        GameObject gluttonsContainerGO = Instantiate(new GameObject(), setup.transform);
+        gluttonsContainerGO.name = "GLUTTONS";
         SpawningGluttons(dg, gluttonsContainerGO);
 
         //====== STEP 4 : Placing gluttons burrows (terriers) ======
         
-        GameObject burrowsContainer = Instantiate(new GameObject("Burrows"), setup.transform);
+        GameObject burrowsContainer = Instantiate(new GameObject(), setup.transform);
+        burrowsContainer.name = "BURROWS";
         //SpawningGluttonsBurrows(burrowsContainer);
 
         //====== STEP 5 : Placing food, fake food and objects on map ======
         
-        GameObject objectsContainerGO = Instantiate(new GameObject("Objects"), setup.transform);
+        GameObject objectsContainerGO = Instantiate(new GameObject(), setup.transform);
+        objectsContainerGO.name = "OBJECTS";
         SpawningFood(dg, objectsContainerGO);
 
         //====== STEP 6 : Init player and gluttons stats (use default values of prefab) ======
@@ -180,7 +183,8 @@ public class GameManager : MonoBehaviour
 
     private void SpawningFood(Dungeon dg, GameObject objectsContainerGO)
     {
-        GameObject foodContainer = Instantiate(new GameObject("Food"), objectsContainerGO.transform);
+        GameObject foodContainer = Instantiate(new GameObject(), objectsContainerGO.transform);
+        foodContainer.name = "FOOD";
         for (int i = 0; i < foodTotalCount; i++)
         {
             //Getting a random spawn location            
@@ -225,6 +229,7 @@ public class GameManager : MonoBehaviour
 
         //Instantiate player
         GameObject playerGO = Instantiate(playerPrefab, playerStartPos3D, Quaternion.identity);
+        playerGO.name = "PLAYER";
         playerGO.transform.parent = setup.transform;
 
         //Adding player as object to follow by camera
