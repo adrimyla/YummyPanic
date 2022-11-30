@@ -24,7 +24,6 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnPlayClick()
     {
-        mainMenu.SetActive(false);
-        GameManager.Instance.UpdateGameState(GameState.PLAYING);
+        GameManager.Instance.UpdateGameState(GameState.LOADING);
     }
 }

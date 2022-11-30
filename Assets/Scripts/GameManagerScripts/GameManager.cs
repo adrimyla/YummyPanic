@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("<color=orange>[GAME STATE] : " + newState + "</color>");
         state = newState;
 
+        OnGameStateChanged(newState);
+
         switch (newState)
         {
             case GameState.INTRO:
@@ -65,13 +67,13 @@ public class GameManager : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
-
-        OnGameStateChanged(newState);
+       
     }
 
     private void HandleIntro()
     {
-        throw new NotImplementedException();
+        //TODO : CINEMATIQUE D'INTRODUCTION
+        UpdateGameState(GameState.MAIN_MENU);
     }
 
     private void HandleMainMenu()
@@ -116,9 +118,9 @@ public class GameManager : MonoBehaviour
 
     private void HandlePlayMode()
     {
-        Debug.Log("Playing !");
-        Time.timeScale = 1;
         throw new NotImplementedException();
+        Debug.Log("Playing !");
+        Time.timeScale = 1;        
     }
 
     private void HandlePauseMode()
