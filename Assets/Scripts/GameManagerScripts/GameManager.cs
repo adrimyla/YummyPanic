@@ -16,9 +16,7 @@ public class GameManager : MonoBehaviour
     public DungeonGenerator dungeon;
 
     [Header("Canvas")]
-    public GameObject mainMenuCanvas;
     public GameObject loadingScreen;
-    public GameObject pauseMenuCanvas;
 
     [Header("Camera")]
     public CameraFollow camFollow;
@@ -99,9 +97,6 @@ public class GameManager : MonoBehaviour
     {
         // Init game canvas
         loadingScreen.SetActive(false);
-        mainMenuCanvas.SetActive(false);
-
-        //TODO : CINEMATIQUE D'INTRODUCTION
 
         UpdateGameState(GameState.MAIN_MENU);
     }
