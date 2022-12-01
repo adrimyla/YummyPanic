@@ -44,6 +44,10 @@ public class GameManager : MonoBehaviour
     public int bonusTotalCount = 10;
     public List<GameObject> bonus;
 
+    [Header("Recipes")]
+    public int minIngredientPerRecipe;
+    public int maxIngredientPerRecipe;
+
     void Awake()
     {
         Instance = this;
@@ -173,11 +177,18 @@ public class GameManager : MonoBehaviour
         GameObject objectsContainerGO = new GameObject();
         objectsContainerGO.transform.parent = setup.transform;
         objectsContainerGO.name = "OBJECTS";
-        SpawningFood(dg, objectsContainerGO);
+
+        GameObject foodContainerGO = new GameObject();
+        foodContainerGO.transform.parent = objectsContainerGO.transform;
+        foodContainerGO.name = "FOOD";
+        SpawningFood(dg, foodContainerGO);
 
         //====== STEP 6 : Init player and gluttons stats (use default values of prefab) ======
 
-        //====== STEP 7 : Init receips and countdown ======
+        //====== STEP 7 : Init recipes manager and countdown ======
+        RecipesManager RM = new RecipesManager(food, minIngredientPerRecipe, maxIngredientPerRecipe);
+        Recipe r = RM.NewRandomRecipe();
+        r.DebugPrintRecipe();
 
         UpdateGameState(GameState.PLAYING); //When loading complete, we start the game !
     }
@@ -195,11 +206,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void SpawningFood(Dungeon dg, GameObject objectsContainerGO)
+    private void SpawningFood(Dungeon dg, GameObject foodContainerGO)
     {
-        GameObject foodContainer = new GameObject();
-        foodContainer.transform.parent = objectsContainerGO.transform;
-        foodContainer.name = "FOOD";
+
         for (int i = 0; i < foodTotalCount; i++)
         {
             //Getting a random spawn location            
@@ -208,7 +217,7 @@ public class GameManager : MonoBehaviour
             //Getting a random element in food
             GameObject foodPrefab = food[Random.Range(0, food.Count)];
             GameObject foodGO = Instantiate(foodPrefab, spawnPos3D, Quaternion.identity);
-            foodGO.transform.parent = foodContainer.transform;
+            foodGO.transform.parent = foodContainerGO.transform;
 
         }
     }
