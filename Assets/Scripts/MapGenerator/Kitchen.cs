@@ -13,6 +13,7 @@ public class Kitchen
     public HashSet<Vector2Int> floorPos; //Contains positions of every floor tile
     public HashSet<Vector2Int> wallPos; //Contains positions of every wall tiles
     public HashSet<Vector2Int> kitchenPos; //Contains positions of kitchen area
+    public Vector2Int playerPos;
 
     public Kitchen(int kitchenHeight, int kitchenWidth, Vector2Int start)
     {
@@ -26,6 +27,9 @@ public class Kitchen
         //Calculating kitchen area
         minPos = start + new Vector2Int(-(width / 2), 0);
         maxPos = start + new Vector2Int(width / 2, height + outsideCorridorLength);
+
+        //Define player position
+        playerPos = start + new Vector2Int(0, outsideCorridorLength + height/2);
 
         CreateFloor(start);
     }
