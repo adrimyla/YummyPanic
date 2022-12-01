@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Player")]
     public GameObject playerPrefab;
+    private GameObject playerGO;
 
     [Header("Gluttons")]
     public GameObject gluttonPrefab;   
@@ -35,6 +36,8 @@ public class GameManager : MonoBehaviour
     public GameObject burrowPrefab;
     [Range(2, 10)]
     public int burrowCount = 10;
+    private GameObject gluttonsContainerGO;
+    private GameObject burrowsContainerGO;
 
     [Header("Objects")]
     public int foodTotalCount = 10;
@@ -43,6 +46,18 @@ public class GameManager : MonoBehaviour
     public List<GameObject> fakeFood;
     public int bonusTotalCount = 10;
     public List<GameObject> bonus;
+    private GameObject foodContainerGO;
+    private GameObject objectsContainerGO;
+
+    [Header("Recipes")]
+    public int minIngredientPerRecipe;
+    public int maxIngredientPerRecipe;
+    private RecipesManager RM;
+
+    [Header("Countdown")]
+    public GameObject countDownDisplayer;
+    public float totalTimeInSeconds = 60f;
+    private CountDownManager CM;
 
     void Awake()
     {
@@ -55,6 +70,11 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
+        if(CM != null)
+        {
+            CM.UpdateCountDown();
+        }
+        
         //Input to enter Pause Menu
         if (Input.GetKeyDown(KeyCode.Escape) && state == GameState.PLAYING)
         {
@@ -125,24 +145,27 @@ public class GameManager : MonoBehaviour
 
     private void HandlePlayMode()
     {
-        Debug.Log("Playing !");
         Time.timeScale = 1;
         loadingScreen.SetActive(false);
+        CM.StartCountDown();
     }
 
     private void HandlePauseMode()
     {
+        CM.StopCountDown();
         Time.timeScale = 0;
     }
 
     private void HandleGameOver()
     {
-        throw new NotImplementedException();
+        Time.timeScale = 0;
     }
 
     private void HandleLoading()
     {
         Debug.Log("Loading game ...");
+
+        CleanPreviousGame();
 
         loadingScreen.SetActive(true);
 
@@ -156,33 +179,67 @@ public class GameManager : MonoBehaviour
 
         //====== STEP 3 : Placing gluttons on map ======
 
-        GameObject gluttonsContainerGO = new GameObject();
+        gluttonsContainerGO = new GameObject();
         gluttonsContainerGO.name = "GLUTTONS";
         gluttonsContainerGO.transform.parent = setup.transform;   
-        SpawningGluttons(dg, gluttonsContainerGO);
+        SpawningGluttons(dg);
 
         //====== STEP 4 : Placing gluttons burrows (terriers) ======
 
-        GameObject burrowsContainer = new GameObject();
-        burrowsContainer.transform.parent = setup.transform;
-        burrowsContainer.name = "BURROWS";
-        SpawningGluttonsBurrows(dg, burrowsContainer);
+        burrowsContainerGO = new GameObject();
+        burrowsContainerGO.transform.parent = setup.transform;
+        burrowsContainerGO.name = "BURROWS";
+        SpawningGluttonsBurrows(dg);
 
         //====== STEP 5 : Placing food, fake food and objects on map ======
 
-        GameObject objectsContainerGO = new GameObject();
+        objectsContainerGO = new GameObject();
         objectsContainerGO.transform.parent = setup.transform;
         objectsContainerGO.name = "OBJECTS";
-        SpawningFood(dg, objectsContainerGO);
+
+        foodContainerGO = new GameObject();
+        foodContainerGO.transform.parent = objectsContainerGO.transform;
+        foodContainerGO.name = "FOOD";
+        SpawningFood(dg);
 
         //====== STEP 6 : Init player and gluttons stats (use default values of prefab) ======
 
-        //====== STEP 7 : Init receips and countdown ======
+        //====== STEP 7 : Init recipes manager and countdown ======
+        // Init recipe manager
+        RM = new RecipesManager(food, minIngredientPerRecipe, maxIngredientPerRecipe);
+        Recipe r = RM.NewRandomRecipe();
+        r.DebugPrintRecipe();
 
+        //Init countdown manager
+        CM = new CountDownManager(totalTimeInSeconds, countDownDisplayer);
         UpdateGameState(GameState.PLAYING); //When loading complete, we start the game !
     }
 
-    private void SpawningGluttonsBurrows(Dungeon dg, GameObject burrowsContainer)
+    private void CleanPreviousGame()
+    {
+        if (playerGO != null)
+        {
+            Destroy(playerGO);
+        }
+
+        if (gluttonsContainerGO != null)
+        {
+            Destroy(gluttonsContainerGO);
+        }
+        
+        if (burrowsContainerGO != null)
+        {
+            Destroy(burrowsContainerGO);
+        }
+
+        if (objectsContainerGO != null)
+        {
+            Destroy(objectsContainerGO);
+        }
+
+    }
+
+    private void SpawningGluttonsBurrows(Dungeon dg)
     {
         for (int i = 0; i < burrowCount; i++)
         {
@@ -190,16 +247,14 @@ public class GameManager : MonoBehaviour
             Vector3 pos = FindFreeLocation(dg.freeFloorPositions);
 
             GameObject burrowGO = Instantiate(burrowPrefab, pos, Quaternion.identity);
-            burrowGO.transform.parent = burrowsContainer.transform;
+            burrowGO.transform.parent = burrowsContainerGO.transform;
 
         }
     }
 
-    private void SpawningFood(Dungeon dg, GameObject objectsContainerGO)
+    private void SpawningFood(Dungeon dg)
     {
-        GameObject foodContainer = new GameObject();
-        foodContainer.transform.parent = objectsContainerGO.transform;
-        foodContainer.name = "FOOD";
+
         for (int i = 0; i < foodTotalCount; i++)
         {
             //Getting a random spawn location            
@@ -208,12 +263,12 @@ public class GameManager : MonoBehaviour
             //Getting a random element in food
             GameObject foodPrefab = food[Random.Range(0, food.Count)];
             GameObject foodGO = Instantiate(foodPrefab, spawnPos3D, Quaternion.identity);
-            foodGO.transform.parent = foodContainer.transform;
+            foodGO.transform.parent = foodContainerGO.transform;
 
         }
     }
 
-    private void SpawningGluttons(Dungeon dg, GameObject gluttonsContainerGO)
+    private void SpawningGluttons(Dungeon dg)
     {   
         for(int i = 0; i < gluttonCount; i++)
         {
@@ -243,7 +298,7 @@ public class GameManager : MonoBehaviour
         Vector3 playerStartPos3D = new Vector3((float)playerStartPos2D.x, (float)playerStartPos2D.y, 0);
 
         //Instantiate player
-        GameObject playerGO = Instantiate(playerPrefab, playerStartPos3D, Quaternion.identity);
+        playerGO = Instantiate(playerPrefab, playerStartPos3D, Quaternion.identity);
         playerGO.name = "PLAYER";
         playerGO.transform.parent = setup.transform;
 
