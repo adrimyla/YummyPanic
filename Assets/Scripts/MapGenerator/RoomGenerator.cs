@@ -10,11 +10,13 @@ public class RoomGenerator : AbstractDungeonGenerator
     [SerializeField]
     private RoomParameter roomParam;
 
-    protected override void RunProceduralGeneration()
+    protected override Dungeon RunProceduralGeneration()
     {
         HashSet<Vector2Int> floorPositions = RunRandomWalk(roomParam, startPosition);
         tilemapVisualizer.PaintFloorTiles(floorPositions); //Display floor
         WallGenerator.CreateWalls(floorPositions); //Display walls
+
+        return new Dungeon();
     }
 
     protected HashSet<Vector2Int> RunRandomWalk(RoomParameter roomParam, Vector2Int position)
