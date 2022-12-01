@@ -211,7 +211,7 @@ public class GameManager : MonoBehaviour
         r.DebugPrintRecipe();
 
         //Init countdown manager
-        CM = new CountDownManager(totalTimeInSeconds);
+        CM = new CountDownManager(totalTimeInSeconds, countDownDisplayer);
         UpdateGameState(GameState.PLAYING); //When loading complete, we start the game !
     }
 

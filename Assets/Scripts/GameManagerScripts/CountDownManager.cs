@@ -1,28 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class CountDownManager
 {
-    public GameObject countDown;
+    public GameObject countDownDisplayerText;
     private bool timerIsRunning;
     private float timeRemaining;
+    private string timeText;
 
-    public CountDownManager(float _totalTimeInSeconds)
+    public CountDownManager(float _totalTimeInSeconds, GameObject _countDownDiplayerText)
     {
         this.timeRemaining = _totalTimeInSeconds;
         this.timerIsRunning = false;
+        this.countDownDisplayerText = _countDownDiplayerText;
     }
 
     public void StartCountDown()
     {
-        Debug.Log("Countdown running");
         timerIsRunning = true;
     }
 
     public void StopCountDown()
     {
-        Debug.Log("Countdown stopped");
         timerIsRunning = false;
     }
 
@@ -33,15 +36,22 @@ public class CountDownManager
             if (timeRemaining > 0)
             {
                 timeRemaining -= Time.deltaTime;
-                Debug.Log(timeRemaining);
             }
             else
             {
-                Debug.Log("Time has run out!");
                 timeRemaining = 0;
                 timerIsRunning = false;
                 GameManager.Instance.UpdateGameState(GameState.GAME_OVER);
             }
+
+            DisplayTime(timeRemaining);
         }
+    }
+    void DisplayTime(float timeToDisplay)
+    {
+        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
+        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+        countDownDisplayerText.GetComponent<TextMeshProUGUI>().text = string.Format("{0:00}:{1:00}", minutes, seconds);
+
     }
 }
