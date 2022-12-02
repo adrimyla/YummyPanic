@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     private GameObject playerGO;
 
     [Header("Gluttons")]
-    public GameObject gluttonPrefab;   
+    public List<GameObject> gluttonPrefabs;   
     [Range (2, 30)]    
     public int gluttonCount = 10;
     public GameObject burrowPrefab;
@@ -274,9 +274,12 @@ public class GameManager : MonoBehaviour
         {
             //Getting a random spawn location
             Vector3 spawnPos3D = FindFreeLocation(dg.freeFloorPositions);
-            
+
+            //Choosing a random glutton prefab
+            GameObject gluttonToSpawn = gluttonPrefabs[Random.Range(0, gluttonPrefabs.Count)];
+
             //Instantiate
-            GameObject gluttonGO = Instantiate(gluttonPrefab, spawnPos3D, Quaternion.identity);
+            GameObject gluttonGO = Instantiate(gluttonToSpawn, spawnPos3D, Quaternion.identity);
             gluttonGO.transform.parent = gluttonsContainerGO.transform;
         }
     }
