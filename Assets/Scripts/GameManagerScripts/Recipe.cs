@@ -6,9 +6,9 @@ public class Recipe
 {
     public static int RecipeCount = 1;
     public int ID { get; set; }
-    private List<GameObject> ingredients;
+    private List<Item> ingredients;
 
-    public Recipe(List<GameObject> _ingredients)
+    public Recipe(List<Item> _ingredients)
     {
         ID = RecipeCount;
         ingredients = _ingredients;
