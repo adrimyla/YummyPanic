@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 5180464665914705249}
   - component: {fileID: 6182988436017439626}
   m_Layer: 0
-  m_Name: Glutton
+  m_Name: GreenGlutton
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -251,7 +251,9 @@ MonoBehaviour:
   _distanceForEating: 1
   _speed: 0
   currentTarget: {fileID: 0}
-  _roamingRadius: 0
+  _roamingRadius: 5
+  _randomPositionsCount: 10
+  _timerBeforeNextPosition: 3
 --- !u!114 &6182988436017439626
 MonoBehaviour:
   m_ObjectHideFlags: 0
