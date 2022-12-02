@@ -114,13 +114,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5598762888315798583}
-  - component: {fileID: 4472515664807730588}
   - component: {fileID: 2157236413348925379}
   - component: {fileID: 4298923929814279641}
+  - component: {fileID: 4472515664807730588}
   - component: {fileID: 5715309433528707171}
   - component: {fileID: 556813542217514952}
   - component: {fileID: 5180464665914705249}
   - component: {fileID: 6182988436017439626}
+  - component: {fileID: -8190628545412058086}
   m_Layer: 0
   m_Name: Glutton
   m_TagString: Enemy
@@ -145,20 +146,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4472515664807730588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5598762888315798581}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24e36568d018cbc41811465619e9ebf9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHP: 10
-  _currentHP: 0
 --- !u!50 &2157236413348925379
 Rigidbody2D:
   serializedVersion: 4
@@ -196,6 +183,20 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.4365957
+--- !u!114 &4472515664807730588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5598762888315798581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24e36568d018cbc41811465619e9ebf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHP: 10
+  _currentHP: 0
 --- !u!114 &5715309433528707171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,6 +269,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   _AIMovement: {fileID: 5180464665914705249}
+--- !u!114 &-8190628545412058086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5598762888315798581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef8ec68559ca1af4b99e94e5bc369d4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items: []
 --- !u!1 &6014909224047246961
 GameObject:
   m_ObjectHideFlags: 0
