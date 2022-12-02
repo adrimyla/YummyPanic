@@ -47,10 +47,6 @@ public class GluttonAI : MonoBehaviour
             MoveTowardTarget(_currentRoamingPosition);
             _timer = 0f;
         }
-        else
-        {
-            Debug.Log("Nope");
-        }
     }
 
     public void MoveTowardTarget(Vector3 destination)
