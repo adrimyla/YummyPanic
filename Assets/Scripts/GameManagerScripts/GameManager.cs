@@ -41,13 +41,13 @@ public class GameManager : MonoBehaviour
 
     [Header("Objects")]
     public int foodTotalCount = 10;
-    public List<GameObject> food;
+    public List<Item> food;
     public int fakeFoodTotalCount = 10;
-    public List<GameObject> fakeFood;
+    public List<Item> fakeFood;
     public int bonusTotalCount = 10;
-    public List<GameObject> bonus;
+    public List<Item> bonus;
     private GameObject foodContainerGO;
-    private GameObject objectsContainerGO;
+    private GameObject objectsContainerGO; 
 
     [Header("Recipes")]
     public int minIngredientPerRecipe;
@@ -261,8 +261,8 @@ public class GameManager : MonoBehaviour
             Vector3 spawnPos3D = FindFreeLocation(dg.freeFloorPositions);
 
             //Getting a random element in food
-            GameObject foodPrefab = food[Random.Range(0, food.Count)];
-            GameObject foodGO = Instantiate(foodPrefab, spawnPos3D, Quaternion.identity);
+            Item foodItem = food[Random.Range(0, food.Count)];
+            GameObject foodGO = Instantiate(foodItem.prefab, spawnPos3D, Quaternion.identity);
             foodGO.transform.parent = foodContainerGO.transform;
 
         }
