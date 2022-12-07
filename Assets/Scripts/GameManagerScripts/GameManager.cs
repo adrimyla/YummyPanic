@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     [Header("Player")]
     public GameObject playerPrefab;
     private GameObject playerGO;
+    public GameObject playerSlotPrefab;
+    public Transform playerItemContainer;
 
     [Header("Gluttons")]
     public List<GameObject> gluttonPrefabs;   
@@ -307,8 +309,12 @@ public class GameManager : MonoBehaviour
 
         //Adding player as object to follow by camera
         camFollow.ObjectToFollow = playerGO.transform;
-    }
 
+        //Creating player inventory
+        playerGO.transform.GetComponent<InventoryManager>().SlotItem = playerSlotPrefab;
+        playerGO.transform.GetComponent<InventoryManager>().ItemContainer = playerItemContainer;
+
+    }
 
 }
 public enum GameState
