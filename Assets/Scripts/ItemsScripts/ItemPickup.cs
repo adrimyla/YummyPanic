@@ -21,7 +21,7 @@ public class ItemPickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject.tag == "Player" && item.type == itemType.FOOD)
         {
             InventoryManager inv = other.GetComponentInParent<InventoryManager>();
             Pickup(inv);

@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1655057682568598368}
-  - component: {fileID: -6975139070086814254}
-  - component: {fileID: 3061284942717978443}
+  - component: {fileID: -354306352099079506}
+  - component: {fileID: -4337531963614123905}
   m_Layer: 0
-  m_Name: Chicken
+  m_Name: PumpkinPie
   m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-6975139070086814254
+--- !u!114 &-354306352099079506
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce6bcac3138b9b0408b748ab96e9fa2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: cabcf192016d71242a47cc7c447db213, type: 2}
---- !u!58 &3061284942717978443
+  item: {fileID: 11400000, guid: 7c5995d2c8eea5e4da66175f181320ad, type: 2}
+--- !u!58 &-4337531963614123905
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,7 +136,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: d43bd255194cdd94fb778cf67ce6493b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fed31b10a4d1a774d9382b1cec848e23, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

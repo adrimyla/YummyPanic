@@ -8,6 +8,13 @@ public class Item : ScriptableObject
     public int id;
     public string itemName;
     public int value;
+    public itemType type;
     public Sprite icon;
     public GameObject prefab;
+}
+
+public enum itemType
+{
+    FOOD,
+    BONUS
 }

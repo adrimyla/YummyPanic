@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c24b3b560c9f0d743954f5e43261569c, type: 3}
-  m_Name: Clock
+  m_Name: Jam
   m_EditorClassIdentifier: 
-  id: 0
-  itemName: Clock
-  value: 30
-  type: 1
-  icon: {fileID: 21300000, guid: 4da5bcdc05c7957428e70e4002cd80e3, type: 3}
-  prefab: {fileID: 1655057682568598371, guid: 62b77c63c4bc33140a56fb384fa9aaa9, type: 3}
+  id: 4
+  itemName: Jam
+  value: 40
+  icon: {fileID: 21300000, guid: 260cb8086a8d77946aedb34d57b495c6, type: 3}
+  prefab: {fileID: 1655057682568598371, guid: 8baf409a6b0208543adc917b621847b1, type: 3}

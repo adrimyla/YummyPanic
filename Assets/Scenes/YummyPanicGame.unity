@@ -1198,10 +1198,10 @@ RectTransform:
   m_Father: {fileID: 941368207}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 237.5, y: 209.5}
-  m_SizeDelta: {x: 146.2681, y: 50}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -209.5, y: -42.5}
+  m_SizeDelta: {x: 146.26807, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &453787439
 MonoBehaviour:
@@ -1875,10 +1875,10 @@ RectTransform:
   m_Father: {fileID: 941368207}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 377.6313, y: 209.5}
-  m_SizeDelta: {x: 80.7374, y: 50}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -82.68298, y: -42.25}
+  m_SizeDelta: {x: 107.37, y: 50.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &776278662
 MonoBehaviour:
@@ -3245,6 +3245,8 @@ MonoBehaviour:
   food:
   - {fileID: 11400000, guid: 9ecce0d9f9166c045aae3d3eaae0b35b, type: 2}
   - {fileID: 11400000, guid: bcd26a2cfd04a234894164875a61d240, type: 2}
+  - {fileID: 11400000, guid: 60a402bbec7f32c4eac5afba8eb37b99, type: 2}
+  - {fileID: 11400000, guid: 7c5995d2c8eea5e4da66175f181320ad, type: 2}
   fakeFoodTotalCount: 10
   fakeFood: []
   bonusTotalCount: 10
@@ -3255,7 +3257,7 @@ MonoBehaviour:
   countDownDisplayer: {fileID: 404564491}
   totalTimeInSeconds: 60
   scoreDisplayer: {fileID: 776278660}
-  actualScore: 0
+  actualScore: 1000
 --- !u!1 &1440610060
 GameObject:
   m_ObjectHideFlags: 0
