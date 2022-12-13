@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5284599724859895049}
   - component: {fileID: 5284599724859895055}
   - component: {fileID: 5284599724859895048}
+  - component: {fileID: 1232083804829565583}
   m_Layer: 0
   m_Name: Kitchen
   m_TagString: Untagged
@@ -58,7 +59,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 9b2ea91fb9970a24d92ba3555a61b11c, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 1
-    m_Data: {fileID: 5945357789820212794, guid: a0d3fbbc155eb404a87f827b40a48dfe, type: 3}
+    m_Data: {fileID: 7477827516038983822, guid: df5c424442e763d44bddb859523dcac5, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 1
     m_Data:
@@ -154,3 +155,19 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!114 &1232083804829565583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5284599724859895054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 0
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff

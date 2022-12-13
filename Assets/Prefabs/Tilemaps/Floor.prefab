@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2977298507486258940}
   - component: {fileID: 2977298507486258930}
   - component: {fileID: 2977298507486258941}
+  - component: {fileID: 4449387070214928813}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -58,7 +59,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 471853985ed4b5242ad12af71ace0cf6, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 1
-    m_Data: {fileID: -9000362276992120081, guid: a0d3fbbc155eb404a87f827b40a48dfe, type: 3}
+    m_Data: {fileID: 1561205615984820651, guid: df5c424442e763d44bddb859523dcac5, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 1
     m_Data:
@@ -154,3 +155,19 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!114 &4449387070214928813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2977298507486258943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 0
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
