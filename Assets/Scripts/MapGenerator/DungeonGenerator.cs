@@ -12,6 +12,8 @@ public class DungeonGenerator : RoomGenerator
 {
     [SerializeField]
     protected DungeonParameter dungeonParameter;
+    [SerializeField]
+    private NavMeshBaking _navMeshBaker;
 
     protected override Dungeon RunProceduralGeneration()
     {       
@@ -82,6 +84,9 @@ public class DungeonGenerator : RoomGenerator
 
         //Displaying dungeon tiles
         tilemapVisualizer.DisplayDungeon(dg.floorPositions, dg.wallPositions, dg.kitchen);
+
+        // Setting up the NavMesh's surfave after all the tiles have been generated
+        _navMeshBaker.ConfigureNavMesh();
 
         return dg;
     }

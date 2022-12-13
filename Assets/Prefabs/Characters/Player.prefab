@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1413253516957084977}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4535582346273182094}
@@ -114,8 +114,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
-  InventoryItem: {fileID: 0}
-  ItemContent: {fileID: 0}
+  SlotItem: {fileID: 0}
+  ItemContainer: {fileID: 0}
 --- !u!1 &4710468781419513284
 GameObject:
   m_ObjectHideFlags: 0
