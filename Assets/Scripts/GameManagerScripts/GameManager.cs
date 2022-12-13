@@ -184,19 +184,19 @@ public class GameManager : MonoBehaviour
 
         SpawningPlayer(dg);
 
-        //====== STEP 3 : Placing gluttons on map ======
-
-        gluttonsContainerGO = new GameObject();
-        gluttonsContainerGO.name = "GLUTTONS";
-        gluttonsContainerGO.transform.parent = setup.transform;   
-        SpawningGluttons(dg);
-
-        //====== STEP 4 : Placing gluttons burrows (terriers) ======
+        //====== STEP 3 : Placing gluttons burrows (terriers) ======
 
         burrowsContainerGO = new GameObject();
         burrowsContainerGO.transform.parent = setup.transform;
         burrowsContainerGO.name = "BURROWS";
         SpawningGluttonsBurrows(dg);
+
+        //====== STEP 4 : Placing gluttons on map ======
+
+        gluttonsContainerGO = new GameObject();
+        gluttonsContainerGO.name = "GLUTTONS";
+        gluttonsContainerGO.transform.parent = setup.transform;   
+        SpawningGluttons(dg);
 
         //====== STEP 5 : Placing food, fake food and objects on map ======
 

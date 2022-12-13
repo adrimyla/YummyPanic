@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8571365767249414663}
   m_Layer: 0
   m_Name: Burrow
-  m_TagString: Untagged
+  m_TagString: Burrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

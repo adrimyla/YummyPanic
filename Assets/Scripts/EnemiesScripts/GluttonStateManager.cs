@@ -77,6 +77,7 @@ public class GluttonStateManager : MonoBehaviour
                 _AIMovement.MoveTowardTarget(_AIMovement.currentTarget.transform.position);
                 break;
             case State.GOING_HOME:
+                _AIMovement.FindNearestBurrow();
                 _AIMovement.MoveTowardTarget(_AIMovement.homeLocation.position);
                 break;
             default:
