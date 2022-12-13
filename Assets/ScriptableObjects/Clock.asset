@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   itemName: Clock
+  value: 30
+  type: 1
   icon: {fileID: 21300000, guid: 4da5bcdc05c7957428e70e4002cd80e3, type: 3}
   prefab: {fileID: 1655057682568598371, guid: 62b77c63c4bc33140a56fb384fa9aaa9, type: 3}
