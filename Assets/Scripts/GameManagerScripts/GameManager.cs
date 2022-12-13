@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using TMPro;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
@@ -60,6 +61,10 @@ public class GameManager : MonoBehaviour
     public GameObject countDownDisplayer;
     public float totalTimeInSeconds = 60f;
     private CountDownManager CM;
+
+    [Header("Score")]
+    public GameObject scoreDisplayer;
+    public int actualScore;
 
     void Awake()
     {
@@ -206,7 +211,8 @@ public class GameManager : MonoBehaviour
 
         //====== STEP 6 : Init player and gluttons stats (use default values of prefab) ======
 
-        //====== STEP 7 : Init recipes manager and countdown ======
+        //====== STEP 7 : Init recipes manager, score and countdown ======
+
         // Init recipe manager
         RM = new RecipesManager(food, minIngredientPerRecipe, maxIngredientPerRecipe);
         Recipe r = RM.NewRandomRecipe();
@@ -214,7 +220,19 @@ public class GameManager : MonoBehaviour
 
         //Init countdown manager
         CM = new CountDownManager(totalTimeInSeconds, countDownDisplayer);
+
+        //Init score
+        UpdatePlayerScore(0);
+
+        //Start Game
         UpdateGameState(GameState.PLAYING); //When loading complete, we start the game !
+    }
+
+    public void UpdatePlayerScore(int value)
+    {
+        actualScore += value;
+        var score = scoreDisplayer.GetComponent<TextMeshProUGUI>();
+        score.text = actualScore.ToString();
     }
 
     private void CleanPreviousGame()

@@ -9,7 +9,13 @@ public class ItemPickup : MonoBehaviour
 
     void Pickup(InventoryManager inv)
     {
+        //Add object to inventory
         inv.Add(item);
+
+        //Update player score
+        GameManager.Instance.UpdatePlayerScore(item.value);
+
+        //Destroy object in scene
         Destroy(gameObject);
     }
 
