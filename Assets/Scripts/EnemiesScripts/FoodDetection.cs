@@ -40,7 +40,6 @@ public class FoodDetection : MonoBehaviour
         if(collision.gameObject.CompareTag(_targetedFoodTag) && currentTarget == null)
         {
             currentTarget = collision.gameObject;
-            Debug.Log("Nourriture détectée");
         }
     }
 

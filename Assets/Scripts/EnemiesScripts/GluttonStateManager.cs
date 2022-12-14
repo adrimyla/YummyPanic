@@ -59,7 +59,6 @@ public class GluttonStateManager : MonoBehaviour
             if(currentState == State.TARGETING_FOOD)
             {
                 currentState = State.GOING_HOME;
-                Debug.Log("Let's go home");
             }
             else if(currentState != State.GOING_HOME)
                 currentState = State.ROAMING;

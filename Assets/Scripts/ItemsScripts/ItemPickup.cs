@@ -9,6 +9,7 @@ public class ItemPickup : MonoBehaviour
 
     void Pickup(InventoryManager inv)
     {
+        Debug.Log("[PLAYER] : picking up " + item.name);
         //Add object to inventory
         inv.Add(item);
 

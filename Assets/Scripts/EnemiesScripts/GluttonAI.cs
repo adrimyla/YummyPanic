@@ -90,7 +90,6 @@ public class GluttonAI : MonoBehaviour
         if (collision.gameObject.CompareTag(targetedFoodTag) && currentTarget == null)
         {
             currentTarget = collision.gameObject;
-            Debug.Log("Nourriture détectée");
         }
     }
 
@@ -100,7 +99,6 @@ public class GluttonAI : MonoBehaviour
         {
             Destroy(collision.gameObject);
             currentTarget = null;
-            Debug.Log("Nourriture récupérée");
         }
     }
 
