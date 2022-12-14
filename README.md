@@ -1,5 +1,4 @@
 # YummyPanic
-Yummy Panic!
 
 ## Context
 Yummy Panic! is a video game prototype created by Dina RANDRIAZANAMPARANY and Adrien PHILIPPON. This project was developed in the context of a video game development course using Unity.
