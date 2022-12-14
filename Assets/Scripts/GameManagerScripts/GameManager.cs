@@ -46,12 +46,10 @@ public class GameManager : MonoBehaviour
     [Header("Objects")]
     public int foodTotalCount = 10;
     public List<Item> food;
-    public int fakeFoodTotalCount = 10;
-    public List<Item> fakeFood;
     public int bonusTotalCount = 10;
     public List<Item> bonus;
     private GameObject foodContainerGO;
-    private GameObject objectsContainerGO; 
+    private GameObject bonusContainerGO; 
 
     [Header("Recipes")]
     public int minIngredientPerRecipe;
@@ -199,14 +197,15 @@ public class GameManager : MonoBehaviour
         gluttonsContainerGO.transform.parent = setup.transform;   
         SpawningGluttons(dg);
 
-        //====== STEP 5 : Placing food, fake food and objects on map ======
+        //====== STEP 5 : Placing food and bonus objects on map ======
 
-        objectsContainerGO = new GameObject();
-        objectsContainerGO.transform.parent = setup.transform;
-        objectsContainerGO.name = "OBJECTS";
+        bonusContainerGO = new GameObject();
+        bonusContainerGO.transform.parent = setup.transform;
+        bonusContainerGO.name = "BONUS";
+        SpawningBonusObjects(dg);
 
         foodContainerGO = new GameObject();
-        foodContainerGO.transform.parent = objectsContainerGO.transform;
+        foodContainerGO.transform.parent = bonusContainerGO.transform;
         foodContainerGO.name = "FOOD";
         SpawningFood(dg);
 
@@ -262,9 +261,9 @@ public class GameManager : MonoBehaviour
             Destroy(burrowsContainerGO);
         }
 
-        if (objectsContainerGO != null)
+        if (bonusContainerGO != null)
         {
-            Destroy(objectsContainerGO);
+            Destroy(bonusContainerGO);
         }
 
         if(CM != null)
@@ -293,10 +292,23 @@ public class GameManager : MonoBehaviour
 
         }
     }
+    private void SpawningBonusObjects(Dungeon dg)
+    {
+        for (int i = 0; i < bonusTotalCount; i++)
+        {
+            //Getting a random spawn location            
+            Vector3 spawnPos3D = FindFreeLocation(dg.freeFloorPositions);
+
+            //Getting a random element in bonus
+            Item bonusItem = bonus[Random.Range(0, bonus.Count)];
+            GameObject bonusGO = Instantiate(bonusItem.prefab, spawnPos3D, Quaternion.identity);
+            bonusGO.transform.parent = bonusContainerGO.transform;
+
+        }
+    }
 
     private void SpawningFood(Dungeon dg)
     {
-
         for (int i = 0; i < foodTotalCount; i++)
         {
             //Getting a random spawn location            

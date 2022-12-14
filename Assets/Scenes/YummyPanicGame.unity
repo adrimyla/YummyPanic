@@ -3242,14 +3242,12 @@ MonoBehaviour:
   burrowPrefab: {fileID: 2626776316640067231, guid: 41ca63f8a45523449b6eb6384a7cf511, type: 3}
   burrowCount: 2
   burrowsContainerGO: {fileID: 0}
-  foodTotalCount: 100
+  foodTotalCount: 30
   food:
   - {fileID: 11400000, guid: 9ecce0d9f9166c045aae3d3eaae0b35b, type: 2}
   - {fileID: 11400000, guid: bcd26a2cfd04a234894164875a61d240, type: 2}
   - {fileID: 11400000, guid: 60a402bbec7f32c4eac5afba8eb37b99, type: 2}
   - {fileID: 11400000, guid: 7c5995d2c8eea5e4da66175f181320ad, type: 2}
-  fakeFoodTotalCount: 10
-  fakeFood: []
   bonusTotalCount: 10
   bonus:
   - {fileID: 11400000, guid: cabcf192016d71242a47cc7c447db213, type: 2}
