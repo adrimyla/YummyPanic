@@ -26,6 +26,16 @@ public class ItemPickup : MonoBehaviour
             InventoryManager inv = other.GetComponentInParent<InventoryManager>();
             Pickup(inv);
         }
+
+        if(other.gameObject.tag == "Player" && item.type == itemType.BONUS)
+        {
+            if(item.name == "Clock")
+            {
+                Debug.Log("BONUS TIME !");
+                GameManager.Instance.NotifyTimeBonus(item.value);
+                Destroy(gameObject);
+            }
+        }
         
     }
 

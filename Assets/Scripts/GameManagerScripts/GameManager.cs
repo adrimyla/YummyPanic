@@ -228,6 +228,11 @@ public class GameManager : MonoBehaviour
         UpdateGameState(GameState.PLAYING); //When loading complete, we start the game !
     }
 
+    public void NotifyTimeBonus(int value)
+    {
+        CM.AddTime(value);
+    }
+
     public void UpdatePlayerScore(int value)
     {
         actualScore += value;
