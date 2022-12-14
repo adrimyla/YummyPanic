@@ -25,7 +25,7 @@ public class GluttonHealth : MonoBehaviour
     public void TakeDamage(int damageTaken)
     {
         this._currentHP -= damageTaken;
-        Debug.Log("PV restants : " + this._currentHP);
+        //Debug.Log("PV restants : " + this._currentHP);
         CheckGluttonState();
         if (!this._isAlive)
             KillGlutton();

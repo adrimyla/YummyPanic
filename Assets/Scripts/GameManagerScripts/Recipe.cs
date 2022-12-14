@@ -21,6 +21,5 @@ public class Recipe
         {
             ingredientList+= ingredient.ToString() + ",";
         }
-        Debug.Log("RECIPE N° " + ID + "\n" + "INGREDIENTS :" + ingredientList + "\n");
     }
 }

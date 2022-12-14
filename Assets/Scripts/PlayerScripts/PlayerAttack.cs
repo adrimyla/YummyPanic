@@ -54,7 +54,7 @@ public class PlayerAttack : MonoBehaviour
         // Affichages
         _damageDisplayer.ShowDamage(_damageDealt);
         //_damageDisplayer.SetDamageColor(target.GetComponent<SpriteRenderer>());
-        Debug.Log("J'attaque");
+        Debug.Log("PAF !");
         _canAttack = false;
     }
 }

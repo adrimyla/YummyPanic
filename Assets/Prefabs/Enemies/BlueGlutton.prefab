@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e36568d018cbc41811465619e9ebf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHP: 10
+  _maxHP: 5
   _currentHP: 0
 --- !u!50 &2157236413348925379
 Rigidbody2D:
@@ -282,6 +282,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
+  SlotItem: {fileID: 0}
+  ItemContainer: {fileID: 0}
 --- !u!1 &6014909224047246961
 GameObject:
   m_ObjectHideFlags: 0
