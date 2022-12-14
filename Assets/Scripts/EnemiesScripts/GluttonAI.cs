@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -22,6 +23,9 @@ public class GluttonAI : MonoBehaviour
     private Vector3 _currentRoamingPosition = Vector3.zero;
     private float _timer;
 
+    // List of burrows on the field
+    private List<GameObject> _burrows = new List<GameObject>();
+
     private void Awake()
     {
         thisAgent = GetComponent<NavMeshAgent>();
@@ -30,6 +34,8 @@ public class GluttonAI : MonoBehaviour
         thisAgent.updateUpAxis = false;
         // Set timer to start the random roaming
         _timer = _timerBeforeNextPosition;
+        // Get all the burrows in the area
+        GetAllBurrows();
     }
 
     private void Update()
@@ -47,9 +53,30 @@ public class GluttonAI : MonoBehaviour
             MoveTowardTarget(_currentRoamingPosition);
             _timer = 0f;
         }
-        else
+    }
+
+    // Search for all burrows at the beginning. They'll be used later whenever the gluttons want to go home
+    public void GetAllBurrows()
+    {
+        foreach (Transform burrow in GameManager.Instance.burrowsContainerGO.transform)
         {
-            Debug.Log("Nope");
+            _burrows.Add(burrow.gameObject);
+        }
+        homeLocation = _burrows[0].transform;
+    }
+
+    // Find nearest burrow after the glutton is full
+    public void FindNearestBurrow()
+    {
+        if(_burrows.Count > 1)
+        {
+            for(int i = 1; i < _burrows.Count; i++)
+            {
+                float distanceToCheck = Vector2.Distance(gameObject.transform.position, _burrows[i].transform.position);
+                // We update the current home's location depending on the distance between the Glutton and the burrow we're currently checking
+                if (distanceToCheck < Vector2.Distance(gameObject.transform.position, homeLocation.position))
+                    homeLocation = _burrows[i].transform;
+            }
         }
     }
 

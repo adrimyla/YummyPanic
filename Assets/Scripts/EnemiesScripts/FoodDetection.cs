@@ -37,7 +37,7 @@ public class FoodDetection : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag(_targetedFoodTag))
+        if(collision.gameObject.CompareTag(_targetedFoodTag) && currentTarget == null)
         {
             currentTarget = collision.gameObject;
             Debug.Log("Nourriture détectée");

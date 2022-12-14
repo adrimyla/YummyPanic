@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class RecipesManager : MonoBehaviour
 {
-    private List<GameObject> foodList;
+    private List<Item> foodList;
     public Recipe currentRecipe;
     public List<Recipe> OldRecipes;
     public int minIngredientPerRecipe;
     public int maxIngredientPerRecipe;
 
-    public RecipesManager(List<GameObject> _food, int min, int max)
+    public RecipesManager(List<Item> _food, int min, int max)
     {
         this.foodList = _food;
         this.minIngredientPerRecipe = min;
@@ -21,7 +21,7 @@ public class RecipesManager : MonoBehaviour
     public Recipe NewRandomRecipe()
     {
         int ingredientCount = Random.Range(minIngredientPerRecipe, maxIngredientPerRecipe);
-        List<GameObject> ingredientList = new List<GameObject>(ingredientCount);
+        List<Item> ingredientList = new List<Item>(ingredientCount);
 
         for (int i = 0; i < ingredientCount; i++)
         {

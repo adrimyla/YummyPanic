@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c24b3b560c9f0d743954f5e43261569c, type: 3}
+  m_Name: Bacon
+  m_EditorClassIdentifier: 
+  id: 2
+  itemName: Bacon
+  value: 20
+  icon: {fileID: 21300000, guid: 279b8bff8d97f7944b0051b8cc99f8a6, type: 3}
+  prefab: {fileID: 1655057682568598371, guid: 2a95da1bab7ed67439463f09eb8998ef, type: 3}

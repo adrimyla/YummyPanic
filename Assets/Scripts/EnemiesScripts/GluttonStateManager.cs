@@ -36,14 +36,34 @@ public class GluttonStateManager : MonoBehaviour
         //    else if(currentState == State.TARGETING_FOOD && _AIMovement.currentTarget == null)
         //        currentState = State.GOING_HOME;
         //}
-        if (_AIMovement.currentTarget != null && _AIMovement.currentTarget.CompareTag(_AIMovement.targetedFoodTag) && currentState != State.TARGETING_FOOD && currentState != State.GOING_HOME)
-            currentState = State.TARGETING_FOOD;
-        else if (_AIMovement.currentTarget != null && _AIMovement.currentTarget.CompareTag("Player") && currentState != State.TARGETING_PLAYER)
-            currentState = State.TARGETING_PLAYER;
-        else if (currentState == State.TARGETING_FOOD && _AIMovement.currentTarget == null)
-            currentState = State.GOING_HOME;
+        //if (_AIMovement.currentTarget != null && _AIMovement.currentTarget.CompareTag(_AIMovement.targetedFoodTag) && currentState != State.TARGETING_FOOD && currentState != State.GOING_HOME)
+        //    currentState = State.TARGETING_FOOD;
+        //else if (_AIMovement.currentTarget != null && _AIMovement.currentTarget.CompareTag("Player") && currentState != State.TARGETING_PLAYER)
+        //    currentState = State.TARGETING_PLAYER;
+        //else if (_AIMovement.currentTarget == null && currentState == State.TARGETING_FOOD)
+        //{
+        //    currentState = State.GOING_HOME;
+        //    Debug.Log("Let's go home");
+        //}
+        //else if(currentState != State.ROAMING && currentState != State.GOING_HOME)
+        //    currentState = State.ROAMING;
+        if (_AIMovement.currentTarget != null)
+        {
+            if(_AIMovement.currentTarget.CompareTag(_AIMovement.targetedFoodTag) && currentState != State.TARGETING_FOOD && currentState != State.GOING_HOME)
+                currentState = State.TARGETING_FOOD;
+            else if (_AIMovement.currentTarget.CompareTag("Player") && currentState != State.TARGETING_PLAYER)
+                currentState = State.TARGETING_PLAYER;
+        }
         else
-            currentState = State.ROAMING;
+        {
+            if(currentState == State.TARGETING_FOOD)
+            {
+                currentState = State.GOING_HOME;
+                Debug.Log("Let's go home");
+            }
+            else if(currentState != State.GOING_HOME)
+                currentState = State.ROAMING;
+        }
     }
 
     private void AdaptBehaviour()
@@ -51,19 +71,16 @@ public class GluttonStateManager : MonoBehaviour
         switch(currentState)
         {
             case State.TARGETING_FOOD:
-                Debug.Log("Bouffe");
                 _AIMovement.MoveTowardTarget(_AIMovement.currentTarget.transform.position);
                 break;
             case State.TARGETING_PLAYER:
-                Debug.Log("Joueur");
                 _AIMovement.MoveTowardTarget(_AIMovement.currentTarget.transform.position);
                 break;
             case State.GOING_HOME:
-                Debug.Log("Base");
+                _AIMovement.FindNearestBurrow();
                 _AIMovement.MoveTowardTarget(_AIMovement.homeLocation.position);
                 break;
             default:
-                Debug.Log("Mouvement aléatoire");
                 _AIMovement.MoveRandomly();
                 break;
         }
