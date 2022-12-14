@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class RecipesManager : MonoBehaviour
+public class RecipesManager
 {
     private List<Item> foodList;
     public Recipe currentRecipe;
