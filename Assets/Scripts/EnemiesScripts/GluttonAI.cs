@@ -58,7 +58,10 @@ public class GluttonAI : MonoBehaviour
     // Search for all burrows at the beginning. They'll be used later whenever the gluttons want to go home
     public void GetAllBurrows()
     {
-        _burrows = GameObject.FindGameObjectsWithTag("Burrow").ToList<GameObject>();
+        foreach (Transform burrow in GameManager.Instance.burrowsContainerGO.transform)
+        {
+            _burrows.Add(burrow.gameObject);
+        }
         homeLocation = _burrows[0].transform;
     }
 

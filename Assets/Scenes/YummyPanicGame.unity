@@ -3241,6 +3241,7 @@ MonoBehaviour:
   gluttonCount: 10
   burrowPrefab: {fileID: 2626776316640067231, guid: 41ca63f8a45523449b6eb6384a7cf511, type: 3}
   burrowCount: 2
+  burrowsContainerGO: {fileID: 0}
   foodTotalCount: 100
   food:
   - {fileID: 11400000, guid: 9ecce0d9f9166c045aae3d3eaae0b35b, type: 2}

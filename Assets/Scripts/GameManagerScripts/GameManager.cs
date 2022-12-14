@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
@@ -40,7 +41,7 @@ public class GameManager : MonoBehaviour
     [Range(2, 10)]
     public int burrowCount = 10;
     private GameObject gluttonsContainerGO;
-    private GameObject burrowsContainerGO;
+    public GameObject burrowsContainerGO;
 
     [Header("Objects")]
     public int foodTotalCount = 10;
@@ -172,7 +173,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Loading game ...");
 
-        CleanPreviousGame();
+        ResetGame();
 
         loadingScreen.SetActive(true);
 
@@ -222,7 +223,7 @@ public class GameManager : MonoBehaviour
         CM = new CountDownManager(totalTimeInSeconds, countDownDisplayer);
 
         //Init score
-        UpdatePlayerScore(0);
+        InitPlayerScore();
 
         //Start Game
         UpdateGameState(GameState.PLAYING); //When loading complete, we start the game !
@@ -235,8 +236,17 @@ public class GameManager : MonoBehaviour
         score.text = actualScore.ToString();
     }
 
-    private void CleanPreviousGame()
+    public void InitPlayerScore()
     {
+        actualScore = 0;
+        var score = scoreDisplayer.GetComponent<TextMeshProUGUI>();
+        score.text = actualScore.ToString();
+    }
+
+    private void ResetGame()
+    {
+        
+
         if (playerGO != null)
         {
             Destroy(playerGO);
@@ -256,6 +266,18 @@ public class GameManager : MonoBehaviour
         {
             Destroy(objectsContainerGO);
         }
+
+        if(CM != null)
+        {
+            CM = null;
+        }
+
+        if(RM != null)
+        {
+            RM = null;
+        }
+
+        InitPlayerScore();        
 
     }
 
@@ -331,7 +353,7 @@ public class GameManager : MonoBehaviour
         //Creating player inventory
         playerGO.transform.GetComponent<InventoryManager>().SlotItem = playerSlotPrefab;
         playerGO.transform.GetComponent<InventoryManager>().ItemContainer = playerItemContainer;
-
+        playerGO.transform.GetComponent<InventoryManager>().ListItems(); //Clear inventory display
     }
 
 }
