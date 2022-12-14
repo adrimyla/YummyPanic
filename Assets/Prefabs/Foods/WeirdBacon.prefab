@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1655057682568598368}
-  - component: {fileID: 4446402401007563829}
-  - component: {fileID: -7241245208924813057}
+  - component: {fileID: -354306352099079506}
+  - component: {fileID: -4337531963614123905}
   m_Layer: 0
-  m_Name: Apple
-  m_TagString: Food_Sour
+  m_Name: WeirdBacon
+  m_TagString: Food_Lumpy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,7 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4446402401007563829
+--- !u!114 &-354306352099079506
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce6bcac3138b9b0408b748ab96e9fa2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 9ecce0d9f9166c045aae3d3eaae0b35b, type: 2}
---- !u!58 &-7241245208924813057
+  item: {fileID: 11400000, guid: bcd26a2cfd04a234894164875a61d240, type: 2}
+--- !u!58 &-4337531963614123905
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,8 +136,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: ca59a6aacb0c9b544ae8d760602cd96e, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 279b8bff8d97f7944b0051b8cc99f8a6, type: 3}
+  m_Color: {r: 0, g: 0.43595576, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

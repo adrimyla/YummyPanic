@@ -3238,7 +3238,12 @@ MonoBehaviour:
   - {fileID: 5598762888315798581, guid: 566b2dacfce0aba45821f4ec389e3230, type: 3}
   - {fileID: 5598762888315798581, guid: e3e47289b54156c4194d7dc514178539, type: 3}
   - {fileID: 5598762888315798581, guid: 46e4f5e4988bb5b4e9ae421291341f48, type: 3}
-  gluttonCount: 10
+  - {fileID: 5598762888315798581, guid: 38ba19f157ccf074f8de1e99e423c386, type: 3}
+  - {fileID: 5598762888315798581, guid: 07d942bf5d056044db63e8b17b3f7558, type: 3}
+  - {fileID: 5598762888315798581, guid: 7046af1d5157cf74a9f0c3cde690ce95, type: 3}
+  - {fileID: 5598762888315798581, guid: b00ff0048cec2524fb1abe7bf0ff6120, type: 3}
+  - {fileID: 5598762888315798581, guid: 552247d6470a5544dacfe4c686e46648, type: 3}
+  gluttonCount: 8
   burrowPrefab: {fileID: 2626776316640067231, guid: 41ca63f8a45523449b6eb6384a7cf511, type: 3}
   burrowCount: 2
   burrowsContainerGO: {fileID: 0}
@@ -3248,6 +3253,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bcd26a2cfd04a234894164875a61d240, type: 2}
   - {fileID: 11400000, guid: 60a402bbec7f32c4eac5afba8eb37b99, type: 2}
   - {fileID: 11400000, guid: 7c5995d2c8eea5e4da66175f181320ad, type: 2}
+  - {fileID: 11400000, guid: 4a696dc78991c124e8e21696337299c4, type: 2}
   bonusTotalCount: 10
   bonus:
   - {fileID: 11400000, guid: cabcf192016d71242a47cc7c447db213, type: 2}

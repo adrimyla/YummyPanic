@@ -57,11 +57,11 @@ public class GluttonStateManager : MonoBehaviour
         else
         {
             if(currentState == State.TARGETING_FOOD)
-            {
                 currentState = State.GOING_HOME;
-            }
-            else if(currentState != State.GOING_HOME)
+            if ((currentState == State.GOING_HOME && _AIMovement.inventory.isEmpty) || currentState != State.GOING_HOME)
                 currentState = State.ROAMING;
+            //else if (currentState != State.GOING_HOME)
+            //    currentState = State.ROAMING;
         }
     }
 
@@ -78,6 +78,7 @@ public class GluttonStateManager : MonoBehaviour
             case State.GOING_HOME:
                 _AIMovement.FindNearestBurrow();
                 _AIMovement.MoveTowardTarget(_AIMovement.homeLocation.position);
+                _AIMovement.CheckIfHome();
                 break;
             default:
                 _AIMovement.MoveRandomly();

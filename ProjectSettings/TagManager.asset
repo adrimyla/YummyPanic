@@ -7,6 +7,11 @@ TagManager:
   - Enemy
   - Food
   - Burrow
+  - Food_Sweet
+  - Food_Spicy
+  - Food_Sour
+  - Food_Bitter
+  - Food_Lumpy
   layers:
   - Default
   - TransparentFX
@@ -14,7 +19,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Enemies
   - 
   - 
   - 

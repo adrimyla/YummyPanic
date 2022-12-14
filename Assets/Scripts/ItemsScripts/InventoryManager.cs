@@ -18,7 +18,7 @@ public class InventoryManager : MonoBehaviour
         Instance = this;
     }
 
-    public void Add(Item item)
+    public virtual void Add(Item item)
     {
         items.Add(item);
         ListItems();
@@ -64,5 +64,14 @@ public class InventoryManager : MonoBehaviour
             itemIcon.sprite = item.Key.icon;
             itemCount.text = item.Value.ToString();
         }
+    }
+
+    /// <summary>
+    /// Stealing all the items from another entity
+    /// </summary>
+    /// <param name="stolenInventory"></param>
+    public virtual void StealItems(InventoryManager stolenInventory)
+    {
+        items.AddRange(stolenInventory.items);
     }
 }

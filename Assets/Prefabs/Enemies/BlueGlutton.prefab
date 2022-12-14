@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5947922700990822680}
   - component: {fileID: 1336692479187415892}
   - component: {fileID: 247317952858315569}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,8 +121,8 @@ GameObject:
   - component: {fileID: 556813542217514952}
   - component: {fileID: 5180464665914705249}
   - component: {fileID: 6182988436017439626}
-  - component: {fileID: -4045776393623468398}
-  m_Layer: 0
+  - component: {fileID: 2490127673659898980}
+  m_Layer: 6
   m_Name: BlueGlutton
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -248,13 +248,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   homeLocation: {fileID: 0}
-  targetedFoodTag: Food
+  targetedFoodTag: Food_Lumpy
   _distanceForEating: 1
+  _homeDistanceOffset: 0.2
   _speed: 0
   currentTarget: {fileID: 0}
+  isHome: 1
   _roamingRadius: 5
   _randomPositionsCount: 10
   _timerBeforeNextPosition: 3
+  inventory: {fileID: 0}
 --- !u!114 &6182988436017439626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,7 +272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   _AIMovement: {fileID: 5180464665914705249}
---- !u!114 &-4045776393623468398
+--- !u!114 &2490127673659898980
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -278,12 +281,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 5598762888315798581}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef8ec68559ca1af4b99e94e5bc369d4c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5cabb347dab6d2642bfb3945a967d264, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
   SlotItem: {fileID: 0}
   ItemContainer: {fileID: 0}
+  _limit: 1
+  isFull: 0
+  isEmpty: 1
 --- !u!1 &6014909224047246961
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,7 +301,7 @@ GameObject:
   - component: {fileID: 3242007437470992423}
   - component: {fileID: 1874308001}
   - component: {fileID: 2968673086858351742}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Detection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
