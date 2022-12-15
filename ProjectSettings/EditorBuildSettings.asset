@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/YummyPanicGame.unity
     guid: 8f3b90f213e5faf42a82ac7ebf60fc5b
   - enabled: 0
-    path: Assets/Scenes/MovingInDungeonScene.unity
-    guid: 20ea897b1e90bcf45802b1efbc650175
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}
