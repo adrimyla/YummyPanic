@@ -9,7 +9,7 @@ Yummy Panic! is a 2D pixel art video game where you have to grab a maximum of fo
 ## Procedural generation
 We used procdeural generation for the dunjeon : each time your start a new game, the dunjeon is different. 
 
-##Pathfinding and NavMeshPlus
+## Pathfinding and NavMeshPlus
 We used pathfinding for gluttons movements and NavMeshPlus to generate a NavMesh and bake it after creting the dunjeon.
 
 ##  Video
