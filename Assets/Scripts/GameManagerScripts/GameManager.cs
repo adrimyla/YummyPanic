@@ -250,7 +250,6 @@ public class GameManager : MonoBehaviour
     private void ResetGame()
     {
         
-
         if (playerGO != null)
         {
             Destroy(playerGO);

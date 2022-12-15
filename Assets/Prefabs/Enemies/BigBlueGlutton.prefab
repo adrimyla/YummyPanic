@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: afd7ac380b420834faf1b32abf3eb401, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 009ba839e108aac47b90ce49b88289a6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -121,9 +121,9 @@ GameObject:
   - component: {fileID: 556813542217514952}
   - component: {fileID: 5180464665914705249}
   - component: {fileID: 6182988436017439626}
-  - component: {fileID: -8689940498768052892}
+  - component: {fileID: 2490127673659898980}
   m_Layer: 6
-  m_Name: YellowGlutton
+  m_Name: BigBlueGlutton
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -138,8 +138,8 @@ Transform:
   m_GameObject: {fileID: 5598762888315798581}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.46, y: 2.31, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5947922700990822680}
   - {fileID: 3242007437470992423}
@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e36568d018cbc41811465619e9ebf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHP: 3
+  _maxHP: 10
   _currentHP: 0
 --- !u!50 &2157236413348925379
 Rigidbody2D:
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   homeLocation: {fileID: 0}
-  targetedFoodTag: Food_Sour
+  targetedFoodTag: Food_Lumpy
   _distanceForEating: 1
   _homeDistanceOffset: 0.2
   _speed: 0
@@ -272,7 +272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   _AIMovement: {fileID: 5180464665914705249}
---- !u!114 &-8689940498768052892
+--- !u!114 &2490127673659898980
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -287,7 +287,7 @@ MonoBehaviour:
   items: []
   SlotItem: {fileID: 0}
   ItemContainer: {fileID: 0}
-  _limit: 1
+  _limit: 5
   isFull: 0
   isEmpty: 1
 --- !u!1 &6014909224047246961

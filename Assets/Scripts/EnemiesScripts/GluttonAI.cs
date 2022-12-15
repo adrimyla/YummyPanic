@@ -13,8 +13,10 @@ public class GluttonAI : MonoBehaviour
     public Transform homeLocation;
     public string targetedFoodTag;
     [SerializeField] private float _distanceForEating;
+    [SerializeField] private float _homeDistanceOffset = 0.2f;
     [SerializeField] private float _speed;
     public GameObject currentTarget = null;
+    [HideInInspector] public bool isHome = true;
 
     [Header("Roaming parameters")]
     [SerializeField] private float _roamingRadius;
@@ -26,9 +28,13 @@ public class GluttonAI : MonoBehaviour
     // List of burrows on the field
     private List<GameObject> _burrows = new List<GameObject>();
 
+    // The personal foods "inventory"
+    [HideInInspector] public GluttonFoodInventory inventory;
+
     private void Awake()
     {
         thisAgent = GetComponent<NavMeshAgent>();
+        inventory = GetComponent<GluttonFoodInventory>();
         // Prevent the Glutton from being impacted by the Z axis
         thisAgent.updateRotation = false;
         thisAgent.updateUpAxis = false;
@@ -80,6 +86,21 @@ public class GluttonAI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    ///  Check if the glutton is back to its burrow
+    /// </summary>
+    public void CheckIfHome()
+    {
+        if (Vector3.Distance(transform.position, homeLocation.position) <= _homeDistanceOffset)
+        {
+            isHome = true;
+            if(!inventory.isEmpty)
+                inventory.FreeInventory();
+        }
+        else
+            isHome = false;
+    }
+
     public void MoveTowardTarget(Vector3 destination)
     {
         thisAgent.SetDestination(destination);
@@ -87,16 +108,19 @@ public class GluttonAI : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag(targetedFoodTag) && currentTarget == null)
+        if (collision.gameObject.CompareTag(targetedFoodTag) && currentTarget == null && !inventory.isFull)
         {
             currentTarget = collision.gameObject;
+            Debug.Log("Food found");
         }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag(targetedFoodTag) && currentTarget != null && Vector3.Distance(collision.transform.position, this.transform.position) <= _distanceForEating)
+        if (collision.gameObject.CompareTag(targetedFoodTag) && currentTarget != null && !inventory.isFull && Vector3.Distance(collision.transform.position, this.transform.position) <= _distanceForEating)
         {
+            Debug.Log("Food eaten");
+            inventory.Add(collision.gameObject.GetComponent<ItemPickup>().item);
             Destroy(collision.gameObject);
             currentTarget = null;
         }
