@@ -1,7 +1,6 @@
 using NavMeshComponents.Extensions;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.AI;
 using UnityEngine;
 using UnityEngine.AI;
 
