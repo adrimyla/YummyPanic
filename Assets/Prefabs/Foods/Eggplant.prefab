@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -354306352099079506}
   - component: {fileID: -4337531963614123905}
   m_Layer: 0
-  m_Name: WeirdBacon
+  m_Name: Eggplant
   m_TagString: Food_Lumpy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce6bcac3138b9b0408b748ab96e9fa2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: bcd26a2cfd04a234894164875a61d240, type: 2}
+  item: {fileID: 11400000, guid: 4a696dc78991c124e8e21696337299c4, type: 2}
 --- !u!58 &-4337531963614123905
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -89,8 +89,8 @@ Transform:
   m_GameObject: {fileID: 5383661638153995133}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1655057682568598368}
   m_RootOrder: 0
@@ -136,8 +136,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 279b8bff8d97f7944b0051b8cc99f8a6, type: 3}
-  m_Color: {r: 0, g: 0.43595576, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 2a59a9f7b8cdddd49a2e7fb6396c1f68, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
